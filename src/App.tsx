@@ -3,15 +3,19 @@ import isMobile from './utils/isMobile';
 import StartMobile from './pages/mobile/StartMobile';
 import StartDesktop from './pages/desktop/StartDesktop';
 
-function App() {
-  React.useEffect(() => {
-    // DEV
-    console.log(isMobile(navigator.userAgent));
-  }, []);
-  if (isMobile(navigator.userAgent)) {
-    return <StartMobile />;
+function App({ FLAG_DEV }: { FLAG_DEV: boolean }) {
+  if (FLAG_DEV) {
+    if (window.innerWidth <= 1050) {
+      return <StartMobile />;
+    } else {
+      return <StartDesktop />;
+    }
   } else {
-    return <StartDesktop />;
+    if (isMobile(navigator.userAgent)) {
+      return <StartMobile />;
+    } else {
+      return <StartDesktop />;
+    }
   }
 }
 
