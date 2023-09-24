@@ -15,7 +15,7 @@ export default function Select({ list, def = 0 }: selectPropsType) {
   return (
     <div className="select">
       <div className="select__visible" onClick={() => setOpen(!open)}>
-        <div className="select__text">{list[def]}</div>
+        <div className="select__text">{list[selected]}</div>
         <div className="select__mini">
           <svg
             width="8"
