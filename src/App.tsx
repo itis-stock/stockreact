@@ -1,3 +1,4 @@
+import Select from './components/universal/Select/Select';
 import Switch from './components/universal/Switch/Switch';
 
 function App() {
@@ -33,9 +34,18 @@ function App() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'column',
+        gap: '40px',
       }}
     >
       <Switch func={(isHandled) => console.log(isHandled)} />
+      <div
+        style={{
+          color: '#fff',
+        }}
+      >
+        <Select list={['lldan', 'rostik', 'aidan']} def={1} />
+      </div>
     </div>
   );
 }
