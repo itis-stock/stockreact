@@ -1,5 +1,5 @@
-import React from 'react';
-import './Select.scss';
+import React from "react";
+import "./Select.scss";
 
 type selectPropsType = {
   list: string[];
@@ -15,7 +15,7 @@ export default function Select({ list, def = 0 }: selectPropsType) {
   return (
     <div className="select">
       <div className="select__visible" onClick={() => setOpen(!open)}>
-        <div className="select__text">{list[def]}</div>
+        <div className="select__text">{list[selected]}</div>
         <div className="select__mini">
           <svg
             width="8"
@@ -40,15 +40,17 @@ export default function Select({ list, def = 0 }: selectPropsType) {
         </div>
       </div>
       <div
-        className={open ? 'select__menu active' : 'select__menu'}
+        className={open ? "select__menu active" : "select__menu"}
         style={{
-          top: '-' + selected * 22 + 'px',
+          top: "-" + selected * 22 + "px",
         }}
       >
         {list.map((el, i) => {
           return (
             <div
-              className={i === selected ? 'select__item active' : 'select__item'}
+              className={
+                i === selected ? "select__item active" : "select__item"
+              }
               key={i}
               onClick={() => {
                 setSelected(i);

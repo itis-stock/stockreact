@@ -3,10 +3,10 @@
   &__visible {
     display: flex;
     padding: 5px 10px;
-    justify-content: center;
     gap: 5px;
     border-radius: 9px;
     cursor: pointer;
+    justify-content: center;
     align-items: center;
     &:hover {
       background: rgba(255, 255, 255, 0.1);

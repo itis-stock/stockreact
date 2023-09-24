@@ -1,0 +1,174 @@
+.modal {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__window{
+    width: 800px;
+    background: #222222;
+    color: #ffffff;
+    border-radius: 12px;
+    display: flex;
+  }
+
+}
+
+.modalContent{
+  padding: 20px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  &__account{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.10);
+  }
+}
+
+.account-block{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.account-title{
+  font-size: 14px;
+  font-style: normal;
+  font-weight:  500;
+  line-height: normal;
+  flex: 1 1 auto;
+}
+
+.account-name{
+  color: rgba(255, 255, 255, 0.50);
+  font-size: 14px;
+  font-style: normal;
+  font-weight:  500;
+  line-height: normal;
+}
+
+.account-text{
+
+  color: rgba(255, 255, 255, 0.50);
+  font-size: 10px;
+  font-style: normal;
+  font-weight:  500;
+  line-height: normal;
+}
+
+.account-button{
+  color: #FFF;
+  padding: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.10);
+  font-size: 10px;
+  font-style: normal;
+  font-weight:  500;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.account__telegram{
+  &-block{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+}
+
+.account__hidden{
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  &-block{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+}
+
+.account__display-name{
+  font-size: 14px;
+  font-weight:  500;
+}
+
+.account__description{
+  &-block{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+}
+
+.account__description-name{
+  font-size: 14px;
+  font-weight:  500;
+}
+
+.account__status{
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  &-block{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+}
+
+.account__background-block{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.account__mat-block{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.account__background-image{
+  border-radius: var(--radius-thin, 3px);
+  background: #9EF9FF;
+  width: 80px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.modalGroup{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.modalContent__group{
+  align-items: center;
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0 0 10px 0;
+}
+
+
+
+.modalContent__course, .modalContent__semester{
+  display: flex;
+  &-block{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,6 +1,6 @@
-import React from 'react';
-import './Switch.scss';
-import { motion } from 'framer-motion';
+import React from "react";
+import "./Switch.scss";
+import { motion } from "framer-motion";
 
 type switchPropsType = {
   func: (isHandled: boolean) => void;
@@ -18,9 +18,12 @@ export default function Switch({ func, def = false }: switchPropsType) {
     func(isHandled);
   };
   return (
-    <div className={isHandled ? 'switch' : 'switch active'} onClick={handleClick}>
+    <div
+      className={isHandled ? "switch" : "switch active"}
+      onClick={handleClick}
+    >
       <motion.div
-        className={isHandled ? 'switch__circle' : 'switch__circle active'}
+        className={isHandled ? "switch__circle" : "switch__circle active"}
         layout
         transition={spring}
       ></motion.div>
@@ -29,7 +32,7 @@ export default function Switch({ func, def = false }: switchPropsType) {
 }
 
 const spring = {
-  type: 'spring',
+  type: "spring",
   stiffness: 700,
   damping: 30,
 };
