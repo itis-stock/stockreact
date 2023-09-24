@@ -33,9 +33,18 @@ function App() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'column',
+        gap: '40px',
       }}
     >
       <Switch func={(isHandled) => console.log(isHandled)} />
+      <div
+        style={{
+          color: '#fff',
+        }}
+      >
+        lldan
+      </div>
     </div>
   );
 }
