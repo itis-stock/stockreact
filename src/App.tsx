@@ -1,3 +1,4 @@
+import Select from './components/universal/Select/Select';
 import Switch from './components/universal/Switch/Switch';
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
           color: '#fff',
         }}
       >
-        lldan
+        <Select list={['lldan', 'rostik', 'aidan']} def={1} />
       </div>
     </div>
   );
