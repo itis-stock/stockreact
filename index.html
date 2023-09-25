@@ -9,11 +9,32 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script src="https://vk.com/js/api/openapi.js?158"></script>
     <script language="javascript">
-      VK.init({
-        apiId: 51757279,
-      });
+      if (window.location.pathname === '/check') {
+        const hash = window.location.hash
+          .replace('#', '')
+          .split('&')
+          .map((el) => el.split('='));
+        console.log(hash);
+        const script = document.createElement('SCRIPT');
+        script.src =
+          'https://api.vk.com/method/groups.get?access_token=' +
+          hash[0][1] +
+          '&user_id=' +
+          hash[2][1] +
+          '&v=5.131' +
+          '&callback=callbackFunc';
+        document.getElementsByTagName('head')[0].appendChild(script);
+        function callbackFunc(result) {
+          console.log(result.response.items);
+          for (let i = 0; i < result.response.items.length; i++) {
+            if (result.response.items[i] === 169708790) {
+              window.location.href = 'http://localhost:5173/main';
+            }
+          }
+          // window.location.href = 'http://localhost:5173/error';
+        }
+      }
     </script>
   </body>
 </html>
