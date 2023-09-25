@@ -3,7 +3,6 @@ import StartMobile from './pages/mobile/StartMobile';
 import StartDesktop from './pages/desktop/StartDesktop';
 
 function App() {
-  console.log(import.meta.env.VITE_FLAG_DEV);
   if (import.meta.env.VITE_FLAG_DEV === '1') {
     return <StartDesktop />;
   } else if (import.meta.env.VITE_FLAG_DEV === '2') {
