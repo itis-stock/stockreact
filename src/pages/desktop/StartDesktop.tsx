@@ -121,6 +121,14 @@ export default function StartDesktop() {
         >
           Продолжить с VK
         </motion.a>
+        <motion.a
+          href="https://oauth.vk.com/authorize?client_id=51756450&redirect_uri=http://localhost:5173/check&display=page&scope=groups&response_type=token&v=5.131"
+          className="start__vk-link"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          Продолжить с VK
+        </motion.a>
         <div>Только для тех, кто состоит в оригинальном стоке</div>
       </div>
       <div className="start__left">
