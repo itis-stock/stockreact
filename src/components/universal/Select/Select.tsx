@@ -1,6 +1,6 @@
 import React from 'react';
 import './Select.scss';
-
+import { motion } from 'framer-motion';
 type selectPropsType = {
   list: string[];
   def?: number;
@@ -39,27 +39,34 @@ export default function Select({ list, def = 0 }: selectPropsType) {
           </svg>
         </div>
       </div>
-      <div
-        className={open ? 'select__menu active' : 'select__menu'}
-        style={{
-          top: '-' + selected * 22 + 'px',
-        }}
-      >
-        {list.map((el, i) => {
-          return (
-            <div
-              className={i === selected ? 'select__item active' : 'select__item'}
-              key={i}
-              onClick={() => {
-                setSelected(i);
-                setOpen(false);
-              }}
-            >
-              {el}
-            </div>
-          );
-        })}
-      </div>
+      {open ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.1 }}
+          className="select__menu"
+          style={{
+            top: '-' + selected * 26 + 'px',
+          }}
+        >
+          {list.map((el, i) => {
+            return (
+              <div
+                className={i === selected ? 'select__item active' : 'select__item'}
+                key={i}
+                onClick={() => {
+                  setSelected(i);
+                  setOpen(false);
+                }}
+              >
+                {el}
+              </div>
+            );
+          })}
+        </motion.div>
+      ) : (
+        ''
+      )}
     </div>
   );
 }
