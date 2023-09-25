@@ -1,316 +1,110 @@
-/**
- * 1. Корректирует высоту строки во всех браузерах.
- * 2. Предотвратить корректировку размера шрифта после смены ориентации в iOS.
- */
-
-html {
-  line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
+/* Reset and base styles  */
+* {
+  padding: 0px;
+  margin: 0px;
+  border: none;
 }
 
-/**
- * Удаление полей во всех браузерах.
- */
-
-body {
-  margin: 0;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/**
- * Рендеринг элемента `main` последовательно в IE.
- */
+/* Links */
 
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Common */
+
+aside,
+nav,
+footer,
+header,
+section,
 main {
   display: block;
 }
 
-/**
- * Корректировка размера шрифта и отступов у элементов `h1` в контекстах `секция` и `статья` в Chrome, Firefox и Safari.
- * `article` в контекстах Chrome, Firefox и Safari.
- */
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: inherit;
+  font-weight: inherit;
 }
 
-/**
- * 1. Добавьте корректный размер коробки в Firefox.
- * 2. Показать переполнение в Edge и IE.
- */
-
-hr {
-  box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  overflow: visible; /* 2 */
+ul,
+ul li {
+  list-style: none;
 }
-
-/**
- * 1. Исправление наследования и масштабирования размера шрифта во всех браузерах.
- * 2. Исправление нечетного размера шрифта `em` во всех браузерах.
- */
-
-pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
-}
-
-/**
- * Убрать серый фон на активных ссылках в IE 10.
- */
-
-a {
-  background-color: transparent;
-}
-
-/**
- * 1. Убрать нижнюю границу в Chrome 57-.
- * 2. Добавить правильное оформление текста в Chrome, Edge, IE, Opera и Safari.
- */
-
-abbr[title] {
-  border-bottom: none; /* 1 */
-  text-decoration: underline; /* 2 */
-  text-decoration: underline dotted; /* 2 */
-}
-
-/**
- * Добавление правильного веса шрифта в Chrome, Edge и Safari.
- */
-
-b,
-strong {
-  font-weight: bolder;
-}
-
-/**
- * 1. Исправление наследования и масштабирования размера шрифта во всех браузерах.
- * 2. Исправление нечетного размера шрифта `em` во всех браузерах.
- */
-
-code,
-kbd,
-samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
-}
-
-/**
- * Добавить правильный размер шрифта во всех браузерах.
- */
-
-small {
-  font-size: 80%;
-}
-
-/**
- * Запрещает элементам `sub` и `sup` влиять на высоту строки во
- * всех браузерах.
- */
-
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-sup {
-  top: -0.5em;
-}
-
-/**
- * Убрать границу у изображений внутри ссылок в IE 10.
- */
 
 img {
-  border-style: none;
+  vertical-align: top;
 }
 
-/**
- * 1. Измените стили шрифтов во всех браузерах.
- * 2. Убрать поля в Firefox и Safari.
- */
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit; /* 1 */
-  font-size: 100%; /* 1 */
-  line-height: 1.15; /* 1 */
-  margin: 0; /* 2 */
-}
-
-/**
- * Показать переполнение в IE.
- * 1. Показать переполнение в Edge.
- */
-
-button,
-input {
-  /* 1 */
-  overflow: visible;
-}
-
-/**
- * Устраните наследование преобразования текста в Edge, Firefox и IE.
- * 1. Удаление наследования преобразования текста в Firefox.
- */
-
-button,
-select {
-  /* 1 */
-  text-transform: none;
-}
-
-/**
- * Удаление внутренней границы и подложки в Firefox.
- */
-
-button::-moz-focus-inner,
-[type='button']::-moz-focus-inner,
-[type='reset']::-moz-focus-inner,
-[type='submit']::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-/**
- * Восстановление стилей фокуса, не установленных предыдущим правилом.
- */
-
-button:-moz-focusring,
-[type='button']:-moz-focusring,
-[type='reset']:-moz-focusring,
-[type='submit']:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-/**
- * Исправление отступов в Firefox.
- */
-
-fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-/**
- * 1. Исправление обертывания текста в Edge и IE.
- * 2. Исправление наследования цвета от элементов `fieldset` в IE.
- * 3. Убрать подложку, чтобы разработчики не попадали впросак при обнулении элементов `fieldset` во всех браузерах.
- * `fieldset`-элементов во всех браузерах.
- */
-
-legend {
-  box-sizing: border-box; /* 1 */
-  color: inherit; /* 2 */
-  display: table; /* 1 */
-  max-width: 100%; /* 1 */
-  padding: 0; /* 3 */
-  white-space: normal; /* 1 */
-}
-
-/**
- * Добавление правильного вертикального выравнивания в Chrome, Firefox и Opera.
- */
-
-progress {
-  vertical-align: baseline;
-}
-
-/**
- * Убрать вертикальную полосу прокрутки по умолчанию в IE 10+.
- */
-
-textarea {
-  overflow: auto;
-}
-
-/**
- * 1. Добавляем корректный размер бокса в IE 10.
- * 2. Убрать подложку в IE 10.
- */
-
-[type='checkbox'],
-[type='radio'] {
-  box-sizing: border-box; /* 1 */
-  padding: 0; /* 2 */
-}
-
-/**
- * Исправление стиля курсора для кнопок инкремента и декремента в Chrome.
- */
-
-[type='number']::-webkit-inner-spin-button,
-[type='number']::-webkit-outer-spin-button {
+img,
+svg {
+  max-width: 100%;
   height: auto;
 }
 
-/**
- * Корректировка стиля контура в Safari.
- */
-
-[type='search'] {
-  outline-offset: -2px;
+address {
+  font-style: normal;
 }
 
-/**
- * Удаление внутренней подложки в Chrome и Safari на macOS.
- */
+/* Form */
 
-[type='search']::-webkit-search-decoration {
-  -webkit-appearance: none;
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
 }
 
-/**
- * 1. Исправление невозможности стилизации кликабельных типов в iOS и Safari.
- * 2. Изменение свойств шрифта на `inherit` в Safari.
- */
-
-::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
+input::-ms-clear {
+  display: none;
 }
 
-/*
- * Добавьте корректное отображение в Edge, IE 10+ и Firefox.
- */
+button,
+input[type='submit'] {
+  display: inline-block;
+  box-shadow: none;
+  background-color: transparent;
+  background: none;
+  cursor: pointer;
+}
 
-details {
+input:focus,
+input:active,
+button:focus,
+button:active {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+label {
+  cursor: pointer;
+}
+
+legend {
   display: block;
-}
-
-/*
- * Добавить корректное отображение во всех браузерах.
- */
-
-summary {
-  display: list-item;
-}
-
-/**
- * Добавить корректное отображение в IE 10+.
- */
-
-template {
-  display: none;
-}
-
-/**
- * Добавить корректное отображение в IE 10.
- */
-
-[hidden] {
-  display: none;
-}
-
-* {
-  font-family: 'SFProDisplay', serif;
 }
