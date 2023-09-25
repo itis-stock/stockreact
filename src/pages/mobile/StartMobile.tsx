@@ -1,3 +1,7 @@
+import StartPage from "../../components/mobile/StartPage/StartPage.tsx";
+
 export default function StartMobile() {
-  return <div>StartMobile</div>;
+  return <div>
+    <StartPage/>
+  </div>;
 }
