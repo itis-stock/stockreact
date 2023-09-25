@@ -4,8 +4,15 @@ import rooster from '/images/Rooster.png';
 import './StartDesktop.scss';
 import Switch from '../../components/universal/Switch/Switch';
 import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 export default function StartDesktop() {
   const [noiseOn, setNoiseOn] = React.useState(false);
+  const vkAuth =
+    'https://oauth.vk.com/authorize?client_id=2685278' +
+    '&scope=1073737727' +
+    '&redirect_uri=' +
+    window.location.href +
+    '&display=page&response_type=token&revoke=1';
   return (
     <div className={noiseOn ? 'start noiseOn' : 'start'}>
       <div className="start__logo">
@@ -104,7 +111,7 @@ export default function StartDesktop() {
         </div>
       </div>
       <div className="start__vk">
-        <motion.a
+        {/* <motion.a
           href="https://oauth.vk.com/authorize?client_id=51756450&redirect_uri=https://bright-truffle-380c91.netlify.app/check&display=page&scope=groups&response_type=token&v=5.131"
           className="start__vk-link"
           whileHover={{ scale: 1.1 }}
@@ -123,6 +130,14 @@ export default function StartDesktop() {
         </motion.a>
         <motion.a
           href="https://oauth.vk.com/authorize?client_id=51756450&redirect_uri=http://localhost:5173/check&display=page&scope=groups&response_type=token&v=5.131"
+          className="start__vk-link"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          Продолжить с VK
+        </motion.a> */}
+        <motion.a
+          href={vkAuth}
           className="start__vk-link"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
