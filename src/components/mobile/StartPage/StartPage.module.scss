@@ -35,10 +35,37 @@
   &__blocks{
     max-width: 1020px;
     margin: 0 auto;
-    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+  &__button{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+    &-item{
+      margin: 0 auto;
+      padding: 20px 65px;
+      text-align: center;
+      border-radius: 9px;
+      background: #3077D7;
+      color: #FFF;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 510;
+      line-height: normal;
+    }
+    &-text{
+      max-width: 300px;
+      text-align: center;
+      color: #FFF;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0 auto;
+    }
   }
   &__info{
     display: flex;
@@ -148,6 +175,18 @@
       color: #FFF;
       font-size: 14px;
       font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .page{
+    &__button{
+      width: 100%;
+      &-item{
+        width: 100%;
+        padding: 20px;
+      }
     }
   }
 }
