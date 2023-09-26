@@ -7,6 +7,7 @@ import axios from 'axios';
 
 export default function Main() {
   const navigate = useNavigate();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function local(buffer: any) {
     console.log(buffer.id);
@@ -28,6 +29,7 @@ export default function Main() {
     } else {
       navigate('/error');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (import.meta.env.VITE_FLAG_DEV === '1') {
     return <MainDesktop />;
