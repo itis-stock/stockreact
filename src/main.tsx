@@ -5,6 +5,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Check from './services/Check';
 import Main from './services/Main';
 import React from 'react';
+import Error from './services/Error';
+import CreateUser from './services/CreateUser';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
   {
     path: '/main',
     element: <Main />,
+  },
+  {
+    path: '/error',
+    element: <Error />,
+  },
+  {
+    path: '/createuser',
+    element: <CreateUser />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')!).render(

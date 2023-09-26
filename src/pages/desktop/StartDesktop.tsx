@@ -126,7 +126,15 @@ export default function StartDesktop() {
       </div>
       <div className="start__right">
         <div>Шум</div>
-        <Switch func={(isHandled) => setNoiseOn(isHandled)} />
+        <Switch
+          func={(isHandled) => {
+            const noise = {
+              status: isHandled,
+            };
+            localStorage.setItem('noise', JSON.stringify(noise));
+            setNoiseOn(isHandled);
+          }}
+        />
       </div>
     </div>
   );
