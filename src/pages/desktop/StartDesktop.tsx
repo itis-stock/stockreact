@@ -1,12 +1,32 @@
 import React from 'react';
 import logoText from '/images/logo-text.png';
-import rooster from '/images/Rooster.png';
+import rooster from '/images/rooster.png';
 import './StartDesktop.scss';
 import Switch from '../../components/universal/Switch/Switch';
 import { motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { setMeta } from '../../redux/metaSlice';
+import { StateType } from '../../redux/StateType';
 // import { motion } from 'framer-motion';
 export default function StartDesktop() {
   const [noiseOn, setNoiseOn] = React.useState(false);
+  const meta = useSelector<StateType>((state) => state.meta.meta);
+  const dispatch = useDispatch();
+  console.log(meta);
+  async function setmeta() {
+    try {
+      const data = (await axios.get('https://stockapi.netlify.app/api/meta.getActual')).data;
+      console.log(data.response);
+      dispatch(setMeta(data.response.data));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  React.useEffect(() => {
+    setmeta();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className={noiseOn ? 'start noiseOn' : 'start'}>
       <div className="start__logo">
