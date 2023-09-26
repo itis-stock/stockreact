@@ -24,15 +24,6 @@ main {
   display: block;
 }
 
-/**
- * Корректировка размера шрифта и отступов у элементов `h1` в контекстах `секция` и `статья` в Chrome, Firefox и Safari.
- * `article` в контекстах Chrome, Firefox и Safari.
- */
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
 
 /**
  * 1. Добавьте корректный размер коробки в Firefox.
