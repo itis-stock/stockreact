@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "srcbuf/utils/isMobile.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
