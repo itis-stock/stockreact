@@ -1,19 +1,21 @@
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import './scss/main.scss';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Check from './services/Check';
-import Main from './services/Main';
 import React from 'react';
-import Error from './services/Error';
-import CreateUser from './services/CreateUser';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+
+import Start from './redirects/Start';
+import Check from './redirects/Check';
+import Main from './redirects/Main';
+import CreateUser from './redirects/CreateUser';
+import ErrorPage from './redirects/ErrorPage';
+import Redirect from './redirects/Redirect';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Start />,
   },
   {
     path: '/check',
@@ -24,12 +26,16 @@ const router = createBrowserRouter([
     element: <Main />,
   },
   {
-    path: '/error',
-    element: <Error />,
-  },
-  {
     path: '/createuser',
     element: <CreateUser />,
+  },
+  {
+    path: '/redirect',
+    element: <Redirect />,
+  },
+  {
+    path: '*',
+    element: <ErrorPage />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')!).render(
