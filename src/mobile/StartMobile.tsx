@@ -34,14 +34,17 @@ export default function StartMobile() {
         </div>
       </div>
       <div className={classes["start__info"]}>
-        <a href="#" className={classes["start__github"]}>
+        <a
+          href="https://github.com/itis-stock"
+          className={classes["start__github"]}
+        >
           <div className={classes["start__github-text"]}>Github</div>
           <div className={classes["start__github-icon"]}>
             <img src={arrow} alt="arrow" />
           </div>
         </a>
         <span className={classes["start__line"]}></span>
-        <a href="#" className={classes["start__telegram"]}>
+        <a href="https://t.me/lld4n" className={classes["start__telegram"]}>
           <div className={classes["start__telegram-text"]}>
             Telegram разработчика
           </div>
