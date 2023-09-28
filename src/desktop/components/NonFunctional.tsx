@@ -33,7 +33,7 @@ export default function NonFunctional({ err }: NonFunctionalPropsType) {
       <div className="non-functional__wrapper">
         <img src={logo} alt="logo" className="non-functional__logo" />
         <div className="non-functional__text">{texts[selectedIndex]}...</div>
-        {err ? (
+        {!err ? (
           <div className="non-functional__light">
             Если вы находитесь на этой странице более минуты, то это значит что что-то пошло не так.
             Рекомендуется вернуться на домашнюю страницу и попробовать еще раз

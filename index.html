@@ -74,52 +74,5 @@
         document.getElementsByTagName('head')[0].appendChild(script);
       }
     </script>
-    <!-- <script language="javascript">
-              function callbackFunc(result) {
-                if (result.response.items) {
-                  let flag = false;
-                  for (let i = 0; i < result.response.items.length; i++) {
-                    if (result.response.items[i] === 169708790) {
-                      flag = true;
-                      createUser();
-                    }
-                  }
-                  if (!flag) {
-                    window.location.href = 'http://localhost:5173/error';
-                  }
-                } else {
-                  const buffer = {
-                    id: result.response[0].id,
-                    photo: result.response[0].photo_max_orig,
-                    fullname: result.response[0].first_name + ' ' + result.response[0].last_name,
-                  };
-                  localStorage.setItem('buffer', JSON.stringify(buffer));
-                  window.location.href = 'http://localhost:5173/main';
-                }
-              }
-            }
-          } else {
-            window.location.href = 'http://localhost:5173/error';
-          }
-        }
-      }
-    </script>
-    <script>
-      function createUser() {
-        const hash = window.location.hash
-          .replace('#', '')
-          .split('&')
-          .map((el) => el.split('='));
-        const script = document.createElement('SCRIPT');
-        script.src =
-          'https://api.vk.com/method/users.get?access_token=' +
-          hash[0][1] +
-          '&user_ids=' +
-          hash[2][1] +
-          '&fields=photo_max_orig&v=5.131' +
-          '&callback=callbackFunc';
-        document.getElementsByTagName('head')[0].appendChild(script);
-      }
-    </script> -->
   </body>
 </html>
