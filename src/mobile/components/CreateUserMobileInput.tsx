@@ -27,7 +27,7 @@ const CreateUserMobileInput = ({
             ].join(" ")
       }
     >
-      <h1 className={classes["createUser__choose-title"]}>telegram_nickname</h1>
+      <h1 className={classes["createUser__choose-title"]}>Telegram</h1>
       <div className={classes["createUser__choose-form"]}>
         <label className={classes["createUser__choose-label"]}>
           <input
@@ -40,13 +40,17 @@ const CreateUserMobileInput = ({
               setInputValue(event.target.value);
             }}
           />
-          <button
-            className={classes["createUser__choose-reset"]}
-            onClick={() => {
-              setInputData("");
-              setInputValue("");
-            }}
-          />
+          {inputValue ? (
+            <button
+              className={classes["createUser__choose-reset"]}
+              onClick={() => {
+                setInputData("");
+                setInputValue("");
+              }}
+            />
+          ) : (
+            ""
+          )}
         </label>
       </div>
       <div className={classes["createUser__choose-footer"]}>

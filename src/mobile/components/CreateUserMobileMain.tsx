@@ -1,10 +1,8 @@
 import classes from "../modules/CreateUser.module.scss";
 import arrow from "/mobile/arrowright.svg";
 import rocket from "/mobile/rocket.svg";
-import Switch from "../../components/Switch/Switch.tsx";
 import rooster from "/mobile/rooster.svg";
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 const CreateUserMobileMain = ({
   setOpenTelegramModal,
@@ -87,15 +85,6 @@ const CreateUserMobileMain = ({
             <span className={classes["createUser__item-name"]}>Аватарка</span>
             <span className={classes["createUser__item-value"]}>
               <img src={rocket} alt="luv" />
-            </span>
-            <span className={classes["start__line"]}></span>
-          </div>
-          <div className={classes["createUser__item-block"]}>
-            <span className={classes["createUser__item-name"]}>
-              Закрытый аккаунт
-            </span>
-            <span className={classes["createUser__item-value"]}>
-              <Switch func={(isHandled) => isHandled} def={false} />
             </span>
             <span className={classes["start__line"]}></span>
           </div>

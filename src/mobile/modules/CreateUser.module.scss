@@ -187,6 +187,7 @@ body{
     align-items: flex-start;
     flex: 1 1 auto;
     background: #1C1C1E;
+    border-radius: 9px;
     gap: 20px;
   }
   &-input{
@@ -202,7 +203,7 @@ body{
     padding: 10px;
     width: 50px;
     height: 30px;
-    background: url("/mobile/reset.svg") right 20px top 10px / 15px no-repeat;
+    background: url("/mobile/reset.svg") right 20px top 14px / 12px no-repeat;
   }
   &-footer{
     width: 100%;
@@ -237,6 +238,7 @@ body{
 
 ::-webkit-scrollbar {
   width: 0;
+  height: 0;
 }
 
 .createUser__choose-inactive{
@@ -267,6 +269,7 @@ body{
     font-size: 16px;
     font-weight: 500;
     text-align: center;
+
   }
   &-form{
     width: 100%;
@@ -292,9 +295,14 @@ body{
   }
   &-name{
     color: rgba(255, 255, 255, 0.30);
-    padding: 0 20px;
+    padding: 15px 20px;
     font-size: 16px;
     font-weight: 500;
+    background: url("../../../public/mobile/arrowright.svg") right 20px top 50% / 8px 14px no-repeat, #1C1C1E;
+    width: 100%;
+    text-align: left;
+    border-radius: 9px;
+
   }
   &-label{
     padding: 0 20px;
@@ -341,7 +349,8 @@ body{
 
 
 ::-webkit-scrollbar {
-  width: 0;
+  //width: 0;
+  //height: 0;
 }
 
 .createUser__select-inactive{
@@ -358,3 +367,51 @@ body{
 }
 
 
+
+
+.createUser__select-group{
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: #000000;
+  gap: 20px;
+}
+
+
+.createUser__select-groupActive{
+  animation: 0.3s on forwards;
+  @keyframes on {
+    from {
+      transform: translateX(100%);
+    }
+    to{
+      transform: translateX(0);
+    }
+  }
+}
+
+
+//::-webkit-scrollbar {
+//  width: 0;
+//  height: 0;
+//}
+
+.createUser__select-groupInactive{
+  animation: 0.3s off forwards;
+  @keyframes off {
+    from {
+      transform: translateX(0);
+    }
+    to{
+      transform: translateX(100%);
+      display: none;
+    }
+  }
+}
