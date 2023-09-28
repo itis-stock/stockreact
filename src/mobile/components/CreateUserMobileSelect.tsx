@@ -8,15 +8,22 @@ const CreateUserMobileSelect = ({
   setOpenGroupModal,
   selectValue,
   setSelectValue,
+  groups,
 }: {
   setOpenGroupModal: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectValue: React.Dispatch<React.SetStateAction<string>>;
   selectValue: string;
 }) => {
-  const [mount, setMount] = React.useState(true);
+  const [mount, setMount] = useState(true);
   const [selectData, setSelectData] = useState(selectValue);
   const [selected, setSelected] = useState(false);
+  const [activeItem, setActiveItem] = useState(selectValue);
 
+  const groupsCourse1 = groups.filter((item) => item.course == "1");
+  groupsCourse1.sort((a, b) => (a.group > b.group ? 1 : -1));
+  const groupsCourse2 = groups.filter((item) => item.course == "2");
+  const groupsCourse3 = groups.filter((item) => item.course == "3");
+  const groupsCourse4 = groups.filter((item) => item.course == "4");
   function select(event) {
     setSelectData(event.target.value);
     setSelectValue(event.target.value);
@@ -41,95 +48,31 @@ const CreateUserMobileSelect = ({
         <div className={classes["createUser__select-block"]}>
           <div className={classes["createUser__select-name"]}>1 курс</div>
           <div className={classes["createUser__select-info"]}>
-            <label className={classes["createUser__select-label"]}>
-              <input
-                type="button"
-                value={"11-301"}
-                className={classes["createUser__select-input"]}
-                onClick={(event) => select(event)}
-              />
-              {selected ? (
-                <img
-                  src={arrowSelect}
-                  alt="select"
-                  className={classes["createUser__select-arrow"]}
+            {groupsCourse1.map((item, index) => (
+              <label
+                key={index}
+                className={classes["createUser__select-label"]}
+              >
+                <input
+                  type="button"
+                  value={item.group}
+                  className={classes["createUser__select-input"]}
+                  onClick={(event) => {
+                    select(event);
+                    setActiveItem(item);
+                  }}
                 />
-              ) : (
-                ""
-              )}
-              <span className={classes["createUser__select-line"]}></span>
-            </label>
-            <label className={classes["createUser__select-label"]}>
-              <input
-                type="button"
-                value={"11-302"}
-                className={classes["createUser__select-input"]}
-                onClick={(event) => select(event)}
-              />
-              {selected ? (
-                <img
-                  src={arrowSelect}
-                  alt="select"
-                  className={classes["createUser__select-arrow"]}
-                />
-              ) : (
-                ""
-              )}
-              <span className={classes["createUser__select-line"]}></span>
-            </label>
-            <label className={classes["createUser__select-label"]}>
-              <input
-                type="button"
-                value={"11-303"}
-                className={classes["createUser__select-input"]}
-                onClick={(event) => select(event)}
-              />
-              {selected ? (
-                <img
-                  src={arrowSelect}
-                  alt="select"
-                  className={classes["createUser__select-arrow"]}
-                />
-              ) : (
-                ""
-              )}
-              <span className={classes["createUser__select-line"]}></span>
-            </label>
-            <label className={classes["createUser__select-label"]}>
-              <input
-                type="button"
-                value={"11-304"}
-                className={classes["createUser__select-input"]}
-                onClick={(event) => select(event)}
-              />
-              {selected ? (
-                <img
-                  src={arrowSelect}
-                  alt="select"
-                  className={classes["createUser__select-arrow"]}
-                />
-              ) : (
-                ""
-              )}
-              <span className={classes["createUser__select-line"]}></span>
-            </label>
-            <label className={classes["createUser__select-label"]}>
-              <input
-                type="button"
-                value={"11-305"}
-                className={classes["createUser__select-input"]}
-                onClick={(event) => select(event)}
-              />
-              {selected ? (
-                <img
-                  src={arrowSelect}
-                  alt="select"
-                  className={classes["createUser__select-arrow"]}
-                />
-              ) : (
-                ""
-              )}
-            </label>
+                {activeItem === item ? (
+                  <img
+                    src={arrowSelect}
+                    alt="select"
+                    className={classes["createUser__select-arrow"]}
+                  />
+                ) : (
+                  ""
+                )}
+              </label>
+            ))}
           </div>
         </div>
       </div>

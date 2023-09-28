@@ -3,7 +3,8 @@ import arrow from "/mobile/arrowright.svg";
 import rocket from "/mobile/rocket.svg";
 import Switch from "../../components/Switch/Switch.tsx";
 import rooster from "/mobile/rooster.svg";
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 const CreateUserMobileMain = ({
   setOpenTelegramModal,
