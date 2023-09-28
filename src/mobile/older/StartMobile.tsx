@@ -1,4 +1,4 @@
-import StartPage from "../../components/mobile/StartPage/StartPage.tsx";
+import StartPage from "./mobile/StartPage/StartPage.tsx";
 import classes from "./StartMobile.module.scss";
 // import MainMobile from './Main/MainMobile.tsx';
 
