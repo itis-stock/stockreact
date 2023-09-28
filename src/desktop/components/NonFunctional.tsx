@@ -24,8 +24,9 @@ export default function NonFunctional({ err }: NonFunctionalPropsType) {
       setInterval(() => {
         const ind = Math.floor(Math.random() * (texts.length - 1)) + 1;
         setSelectedIndex(ind);
-      }, 1000);
+      }, 10000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="non-functional">

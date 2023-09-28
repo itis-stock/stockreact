@@ -37,7 +37,7 @@ export default function Select({ list, func, defaultIndex = 0 }: SelectPropsType
           className="select__invisible"
           style={{
             width: list.length > 5 ? widthMaxElement + 60 : widthMaxElement + 40,
-            top: list.length > 5 ? 0 : '-' + selectedIndex * 38 + 'px',
+            top: 0,
           }}
         >
           {list.map((el, i) => {
