@@ -9,29 +9,72 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script language="javascript"></script>
-    <!-- <script language="javascript">
+    <script language="javascript">
       if (window.location.pathname === '/check') {
-        if (localStorage.getItem('user')) {
-          window.location.href = 'http://localhost:5173/main';
+        const user = localStorage.getItem('user');
+        if (window.location.hash) {
+          const hash = window.location.hash
+            .replace('#', '')
+            .split('&')
+            .map((el) => el.split('='));
+          if (hash.length !== 3) {
+            window.location.href = window.location.origin + '/error';
+          } else if (user && hash[2][1] === JSON.parse(user)['id']) {
+            window.location.href = window.location.origin + '/main';
+          } else {
+            const script = document.createElement('SCRIPT');
+            script.src =
+              'https://api.vk.com/method/groups.get?access_token=' +
+              hash[0][1] +
+              '&user_id=' +
+              hash[2][1] +
+              '&v=5.131' +
+              '&callback=callbackFunc';
+            document.getElementsByTagName('head')[0].appendChild(script);
+          }
         } else {
-          if (window.location.hash) {
-            const hash = window.location.hash
-              .replace('#', '')
-              .split('&')
-              .map((el) => el.split('='));
-            if (hash.length !== 3) {
-              window.location.href = 'http://localhost:5173/error';
-            } else {
-              const script = document.createElement('SCRIPT');
-              script.src =
-                'https://api.vk.com/method/groups.get?access_token=' +
-                hash[0][1] +
-                '&user_id=' +
-                hash[2][1] +
-                '&v=5.131' +
-                '&callback=callbackFunc';
-              document.getElementsByTagName('head')[0].appendChild(script);
+          window.location.href = window.location.origin + '/error';
+        }
+      }
+      function callbackFunc(result) {
+        if (result.response.items) {
+          let flag = false;
+          for (let i = 0; i < result.response.items.length; i++) {
+            if (result.response.items[i] === 169708790) {
+              flag = true;
+              createBuffer();
+            }
+          }
+          if (!flag) {
+            window.location.href = window.location.origin + '/error';
+          }
+        } else {
+          const buffer = {
+            id: result.response[0].id,
+            photo: result.response[0].photo_max_orig,
+            fullname: result.response[0].first_name + ' ' + result.response[0].last_name,
+          };
+          localStorage.setItem('buffer', JSON.stringify(buffer));
+          window.location.href = window.location.origin + '/redirect';
+        }
+      }
+      function createBuffer() {
+        const hash = window.location.hash
+          .replace('#', '')
+          .split('&')
+          .map((el) => el.split('='));
+        const script = document.createElement('SCRIPT');
+        script.src =
+          'https://api.vk.com/method/users.get?access_token=' +
+          hash[0][1] +
+          '&user_ids=' +
+          hash[2][1] +
+          '&fields=photo_max_orig&v=5.131' +
+          '&callback=callbackFunc';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }
+    </script>
+    <!-- <script language="javascript">
               function callbackFunc(result) {
                 if (result.response.items) {
                   let flag = false;

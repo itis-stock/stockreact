@@ -3,7 +3,7 @@ import './scss/main.scss';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
+import store from './redux/store';
 
 import Start from './redirects/Start';
 import Check from './redirects/Check';

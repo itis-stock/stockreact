@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import metaReducer from './metaSlice';
 
-export const store = configureStore({
-  reducer: {
-    meta: metaReducer,
-  },
+const store = configureStore({
+  reducer: metaReducer,
 });
+
+export default store;

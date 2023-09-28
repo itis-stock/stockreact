@@ -1,5 +1,5 @@
-import React from 'react';
+import NonFunctional from './components/NonFunctional';
 
 export default function ErrorPageDesktop() {
-  return <div>ErrorPageDesktop</div>;
+  return <NonFunctional err={true} />;
 }
