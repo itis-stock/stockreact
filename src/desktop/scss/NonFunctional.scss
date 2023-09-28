@@ -1,0 +1,36 @@
+.non-functional {
+  background: url('/desktop/bg.jpeg') center / cover no-repeat;
+  color: white;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  &__wrapper {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+  }
+  &__text {
+    font-size: 32px;
+  }
+  &__light {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  &__error {
+    display: flex;
+    padding: 5px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    border-radius: 9px;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
