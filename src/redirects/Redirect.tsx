@@ -9,10 +9,9 @@ export default function Start() {
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function checking(obj: any) {
-    if (obj && obj.vk_id) {
-      const data = (
-        await axios.get('https://stockapi.netlify.app/api/users.check?fb_id=' + obj.vk_id)
-      ).data;
+    if (obj && obj.id) {
+      const data = (await axios.get('https://stockapi.netlify.app/api/users.check?fb_id=' + obj.id))
+        .data;
       if (data.response.data) {
         localStorage.setItem('user', JSON.stringify(data.response.data));
         localStorage.removeItem('buffer');
@@ -24,8 +23,10 @@ export default function Start() {
   }
   React.useEffect(() => {
     if (localStorage.getItem('user')) {
+      console.log(JSON.parse(String(localStorage.getItem('user'))));
       checking(JSON.parse(String(localStorage.getItem('user'))));
     } else if (localStorage.getItem('buffer')) {
+      console.log(JSON.parse(String(localStorage.getItem('buffer'))));
       checking(JSON.parse(String(localStorage.getItem('buffer'))));
     } else {
       navigate('/error');

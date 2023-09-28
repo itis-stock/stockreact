@@ -6,22 +6,22 @@ import axios from 'axios';
 import { setMeta } from '../redux/metaSlice';
 import Select from '../components/Select/Select';
 import Switch from '../components/Switch/Switch';
+import qs from 'qs';
 export default function CreateUserDesktop() {
   const [telegramValue, setTelegramValue] = React.useState('');
   const [displayName, setDisplayName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [group, setGroup] = React.useState('');
-  const [hidden, setHidden] = React.useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [buffer, setBuffer] = React.useState<any>(null);
   async function postUser() {
     const dataPost = {
+      id: buffer?.id,
       id_vk: buffer?.id,
       name_vk: buffer.fullname,
       telegram_nickname: telegramValue,
       group: group,
       photo_url: buffer.photo,
-      hidden: hidden,
       display_name: displayName,
       description: description,
     };
@@ -29,10 +29,11 @@ export default function CreateUserDesktop() {
     console.log('постим');
     const data = await axios.post(
       'https://stockapi.netlify.app/api/users.post',
-      JSON.stringify(dataPost),
+      qs.stringify(dataPost),
       {
         headers: {
           master_key: import.meta.env.VITE_MASTER_KEY,
+          'content-type': 'application/x-www-form-urlencoded',
         },
       },
     );
@@ -110,11 +111,6 @@ export default function CreateUserDesktop() {
             <div className="create-user__content-item">
               <div className="create-user__left">Аватарка</div>
               <img src={buffer?.photo} alt="" className="create-user__img" />
-            </div>
-            <div className="create-user__separator"></div>
-            <div className="create-user__content-item">
-              <div className="create-user__left">Закрытый аккаунт</div>
-              <Switch func={(c) => setHidden(c)} />
             </div>
             <div className="create-user__separator"></div>
             <div className="create-user__content-item">
