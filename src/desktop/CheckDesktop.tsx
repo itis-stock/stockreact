@@ -1,5 +1,6 @@
 import React from 'react';
+import NonFunctional from './components/NonFunctional';
 
 export default function CheckDesktop() {
-  return <div>CheckDesktop</div>;
+  return <NonFunctional err={false} />;
 }

@@ -11,6 +11,8 @@ import Main from './redirects/Main';
 import CreateUser from './redirects/CreateUser';
 import ErrorPage from './redirects/ErrorPage';
 import Redirect from './redirects/Redirect';
+import API from './redirects/API';
+import History from './redirects/History';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
   {
     path: '/redirect',
     element: <Redirect />,
+  },
+  {
+    path: '/API',
+    element: <API />,
+  },
+  {
+    path: '/history',
+    element: <History />,
   },
   {
     path: '*',
