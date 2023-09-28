@@ -2,12 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const metaSlice = createSlice({
   name: 'meta',
-  initialState: {
-    meta: null,
-  },
+  initialState: null,
   reducers: {
     setMeta: (state, action) => {
-      state.meta = action.payload;
+      return action.payload;
     },
   },
 });

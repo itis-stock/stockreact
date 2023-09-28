@@ -1,62 +1,54 @@
 import React from 'react';
 import './Select.scss';
 import { motion } from 'framer-motion';
-type selectPropsType = {
+import doubleArrows from '/desktop/doubleArrows.svg';
+type SelectPropsType = {
   list: string[];
-  def?: number;
+  func: (element: string) => void;
+  defaultIndex?: number;
 };
-/**
- * @param list `string[]` массив элементов, которые будут доступны в селекте
- * @param def `number` индекс элемента, выбранного по умолчанию, если не указать, то def = 0
- */
-export default function Select({ list, def = 0 }: selectPropsType) {
-  const [selected, setSelected] = React.useState(def);
-  const [open, setOpen] = React.useState(false);
+
+export default function Select({ list, func, defaultIndex = 0 }: SelectPropsType) {
+  const [selectedIndex, setSelectedIndex] = React.useState(defaultIndex);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [widthMaxElement, setWidthMaxElement] = React.useState(0);
+  React.useEffect(() => {
+    const listSorted = list.sort((a, b) => b.length - a.length);
+    const element = document.createElement('span');
+    element.className = 'select__text';
+    element.textContent = listSorted[0];
+    document.body.appendChild(element);
+    setWidthMaxElement(element.offsetWidth);
+    document.body.removeChild(element);
+  }, [list]);
   return (
     <div className="select">
-      <div className="select__visible" onClick={() => setOpen(!open)}>
-        <div className="select__text">{list[selected]}</div>
-        <div className="select__mini">
-          <svg
-            width="8"
-            height="11"
-            viewBox="0 0 8 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.5 4L4 0.5L7.5 4"
-              stroke="white"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M7.5 7L4 10.5L0.5 7"
-              stroke="white"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+      <div className="select__visible" onClick={() => setIsOpen(true)}>
+        <div className="select__text">{list[selectedIndex]}</div>
+        <div className="select__svg">
+          <img src={doubleArrows} alt="двойные стрелки" />
         </div>
       </div>
-      {open ? (
+      {isOpen ? (
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.1 }}
-          className="select__menu"
+          className="select__invisible"
           style={{
-            top: '-' + selected * 26 + 'px',
+            width: list.length > 5 ? widthMaxElement + 60 : widthMaxElement + 40,
+            top: 0,
           }}
         >
           {list.map((el, i) => {
             return (
               <div
-                className={i === selected ? 'select__item active' : 'select__item'}
                 key={i}
+                className={i === selectedIndex ? 'select__item select__active' : 'select__item'}
                 onClick={() => {
-                  setSelected(i);
-                  setOpen(false);
+                  setSelectedIndex(i);
+                  func(el);
+                  setIsOpen(false);
                 }}
               >
                 {el}

@@ -1,56 +1,60 @@
 .select {
   position: relative;
+  font-size: 20px;
+  user-select: none;
   &__visible {
     display: flex;
-    padding: 5px 10px;
-    justify-content: center;
     gap: 5px;
+    padding: 5px 10px;
+    align-items: center;
+    justify-content: center;
     border-radius: 9px;
     cursor: pointer;
-    align-items: center;
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.3);
     }
   }
   &__text {
     line-height: 1;
+    font-size: 20px;
   }
-  &__mini {
+  &__svg {
+    width: 24px;
+    height: 24px;
     display: flex;
-    width: 16px;
-    height: 16px;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 3px;
-    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
   }
-  &__menu {
+  &__invisible {
+    top: 0;
     position: absolute;
-    display: flex;
-    padding: 5px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2px;
-    border-radius: 9px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: #222;
     right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #1c1c1e;
+    max-height: 230px;
+    overflow: auto;
+    z-index: 10;
   }
   &__item {
-    display: flex;
-    padding: 2px 10px;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    border-radius: 3px;
+    padding: 5px 10px;
     cursor: pointer;
+    border-radius: 5px;
+    text-align: right;
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.3);
     }
   }
-  &__item.active {
-    background: #3478f6;
+  &__active {
+    background-color: #0a7aff;
+    &:hover {
+      background-color: #0a7aff;
+    }
   }
 }
