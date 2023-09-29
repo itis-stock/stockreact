@@ -1,9 +1,9 @@
-import logo from "/mobile/logo.svg";
+import logo from './images/logo.svg'
 
 export default function MainMobile() {
   return (
     <div>
       <img src={logo} alt="" />
     </div>
-  );
+  )
 }

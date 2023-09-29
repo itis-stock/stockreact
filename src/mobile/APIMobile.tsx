@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
+import StartMobileAPI from "./components/StartMobile/StartMobileAPI.tsx";
 
 export default function APIMobile() {
-  return <div>APIMobile</div>;
+  return <div></div>;
 }

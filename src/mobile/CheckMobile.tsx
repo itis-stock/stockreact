@@ -1,6 +1,6 @@
 import classes from "./modules/CheckMobile.module.scss";
-import logo from "../../public/mobile/logo.svg";
-import rooster from "../../public/mobile/rooster.svg";
+import logo from "./images/logo.svg";
+import rooster from "./images/rooster.svg";
 export default function CheckMobile() {
   return (
     <div className={classes["check"]}>
