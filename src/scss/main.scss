@@ -10,3 +10,11 @@ body,
 #root {
   height: 100%;
 }
+
+body.mobile {
+  background: #000000;
+  &::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
+}
