@@ -1,5 +1,9 @@
 body.mobile{
   background: #000000;
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 
@@ -267,10 +271,6 @@ body.mobile{
 }
 
 
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
 
 .createUser__choose-inactive{
   animation: 0.3s off forwards;
