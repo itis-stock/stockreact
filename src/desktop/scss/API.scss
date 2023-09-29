@@ -1,0 +1,90 @@
+.api-desktop {
+  display: flex;
+  height: 100%;
+  background: url('/desktop/bg.jpeg') center/ cover no-repeat;
+  font-size: 20px;
+  flex-wrap: wrap;
+  &__sidebar {
+    display: flex;
+    width: 300px;
+    padding: 20px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__sidebar-item {
+    display: flex;
+    padding: 10px;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 9px;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    &.active {
+      background-color: black;
+      color: white;
+    }
+  }
+  &__wrapper {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+  }
+  &__content {
+    border-radius: 9px;
+    background: #1c1c1e;
+    height: 100%;
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    color: white;
+    padding: 0 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+  }
+  &__subtitle {
+    font-weight: 700;
+    margin-top: 20px;
+  }
+  &__subsubtitle {
+    padding: 5px;
+    border-radius: 5px;
+    background: #fff;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    font-weight: 700;
+  }
+  &__highlight {
+    padding: 2px 5px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    color: black;
+    // line-height: 1;
+  }
+  &__text {
+    line-height: 170%;
+    padding-left: 40px;
+  }
+  &__go {
+    display: flex;
+    padding: 10px;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 9px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
+    &:hover {
+      background-color: rgb(255, 255, 255);
+    }
+  }
+}

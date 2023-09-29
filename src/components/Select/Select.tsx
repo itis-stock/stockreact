@@ -1,7 +1,7 @@
 import React from 'react';
 import './Select.scss';
 import { motion } from 'framer-motion';
-import doubleArrows from '/desktop/doubleArrows.svg';
+import doubleArrows from './doubleArrows.svg';
 type SelectPropsType = {
   list: string[];
   func: (element: string) => void;

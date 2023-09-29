@@ -23,10 +23,8 @@ export default function Start() {
   }
   React.useEffect(() => {
     if (localStorage.getItem('user')) {
-      console.log(JSON.parse(String(localStorage.getItem('user'))));
       checking(JSON.parse(String(localStorage.getItem('user'))));
     } else if (localStorage.getItem('buffer')) {
-      console.log(JSON.parse(String(localStorage.getItem('buffer'))));
       checking(JSON.parse(String(localStorage.getItem('buffer'))));
     } else {
       navigate('/error');

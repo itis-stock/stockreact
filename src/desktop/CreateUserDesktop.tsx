@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setMeta } from '../redux/metaSlice';
 import Select from '../components/Select/Select';
-import Switch from '../components/Switch/Switch';
 import qs from 'qs';
 export default function CreateUserDesktop() {
   const [telegramValue, setTelegramValue] = React.useState('');
@@ -22,11 +21,9 @@ export default function CreateUserDesktop() {
       telegram_nickname: telegramValue,
       group: group,
       photo_url: buffer.photo,
-      display_name: displayName,
+      display_name: displayName || buffer.fullname,
       description: description,
     };
-    console.log(dataPost);
-    console.log('постим');
     const data = await axios.post(
       'https://stockapi.netlify.app/api/users.post',
       qs.stringify(dataPost),
@@ -40,6 +37,7 @@ export default function CreateUserDesktop() {
     console.log(data.data);
     localStorage.removeItem('buffer');
     localStorage.setItem('user', JSON.stringify(dataPost));
+    navigate('/main');
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,7 +53,6 @@ export default function CreateUserDesktop() {
   React.useEffect(() => {
     if (localStorage.getItem('buffer')) {
       setBuffer(JSON.parse(String(localStorage.getItem('buffer'))));
-      setDisplayName(buffer?.fullname);
     } else {
       navigate('/error');
     }

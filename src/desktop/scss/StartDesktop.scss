@@ -8,30 +8,6 @@
   gap: 40px;
   position: relative;
   font-size: 20px;
-  &__tip {
-    color: #00ffa3;
-    font-size: 16px;
-  }
-  &__tip-what {
-    position: absolute;
-    top: 22px;
-    left: -43px;
-  }
-  &__tip-why {
-    position: absolute;
-    top: 96px;
-    left: -63px;
-  }
-  &__tip-github {
-    position: absolute;
-    left: -345px;
-    top: 11px;
-  }
-  &__tip-telegram {
-    position: absolute;
-    right: -255px;
-    top: 11px;
-  }
   &__wrapper {
     width: 1000px;
     display: flex;
@@ -111,6 +87,14 @@
     border-radius: 9px;
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+@media (max-height: 820px) {
+  .start {
+    &__wrapper {
+      gap: 20px;
     }
   }
 }
