@@ -3,18 +3,8 @@ import NonFunctional from './components/NonFunctional';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './scss/API.scss';
-type apiType = {
-  title: string;
-  content: apiContentType[];
-};
-type apiContentType = {
-  type: 'text' | 'subtitle' | 'subsubtitle';
-  item: apiContentItemType[];
-};
-type apiContentItemType = {
-  text: string;
-  highlight: boolean;
-};
+import { apiType } from '../@types';
+
 export default function APIDesktop() {
   const [api, setApi] = React.useState<apiType[]>([]);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -29,6 +19,7 @@ export default function APIDesktop() {
   }
   React.useEffect(() => {
     getting();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (api.length === 0) {
     return <NonFunctional err={false} />;

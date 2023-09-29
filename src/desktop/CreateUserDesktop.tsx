@@ -6,22 +6,22 @@ import axios from 'axios';
 import { setMeta } from '../redux/metaSlice';
 import Select from '../components/Select/Select';
 import qs from 'qs';
+import { bufferType, metaType } from '../@types';
 export default function CreateUserDesktop() {
   const [telegramValue, setTelegramValue] = React.useState('');
   const [displayName, setDisplayName] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [group, setGroup] = React.useState('');
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [buffer, setBuffer] = React.useState<any>(null);
+  const [buffer, setBuffer] = React.useState<bufferType | null>(null);
   async function postUser() {
     const dataPost = {
       id: buffer?.id,
       id_vk: buffer?.id,
-      name_vk: buffer.fullname,
+      name_vk: buffer?.fullname,
       telegram_nickname: telegramValue,
       group: group,
-      photo_url: buffer.photo,
-      display_name: displayName || buffer.fullname,
+      photo_url: buffer?.photo,
+      display_name: displayName || buffer?.fullname,
       description: description,
     };
     const data = await axios.post(
@@ -40,8 +40,7 @@ export default function CreateUserDesktop() {
     navigate('/main');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const meta = useSelector((state: any) => state);
+  const meta = useSelector((state: metaType) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   async function gettingMeta() {
@@ -57,6 +56,7 @@ export default function CreateUserDesktop() {
       navigate('/error');
     }
     gettingMeta();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="create-user">
