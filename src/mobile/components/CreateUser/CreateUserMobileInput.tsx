@@ -1,37 +1,34 @@
-import classes from '../../modules/CreateUser.module.scss'
-import rooster from '../../images/rooster.svg'
-import arrow from '../../images/arrowleft.svg'
-import React, { useState } from 'react'
+/* eslint-disable */
+
+import classes from '../../modules/CreateUser.module.scss';
+import rooster from '../../images/rooster.svg';
+import arrow from '../../images/arrowleft.svg';
+import React, { useState } from 'react';
 const CreateUserMobileInput = ({
   inputValue,
   setOpen,
   setInputValue,
   title,
 }: {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  inputValue: string
-  title: string
-  setInputValue: React.Dispatch<React.SetStateAction<string>>
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  inputValue: string;
+  title: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const [inputData, setInputData] = useState(inputValue)
-  const [mount, setMount] = useState(true)
-  console.log()
+  const [inputData, setInputData] = useState(inputValue);
+  const [mount, setMount] = useState(true);
+  console.log();
   if (inputData === 'Написать') {
-    setInputData('')
+    setInputData('');
   }
   return (
     <div
       className={
         mount
-          ? [
-              classes['createUser__choose'],
-              classes['createUser__choose-active'],
-            ].join(' ')
-          : [
-              classes['createUser__choose'],
-              classes['createUser__choose-inactive'],
-            ].join(' ')
-      }>
+          ? [classes['createUser__choose'], classes['createUser__choose-active']].join(' ')
+          : [classes['createUser__choose'], classes['createUser__choose-inactive']].join(' ')
+      }
+    >
       <h1 className={classes['createUser__choose-title']}>{title}</h1>
       <div className={classes['createUser__choose-form']}>
         <label className={classes['createUser__choose-label']}>
@@ -41,16 +38,16 @@ const CreateUserMobileInput = ({
             placeholder="Введите что-то..."
             className={classes['createUser__choose-input']}
             onChange={(event) => {
-              setInputData(event.target.value)
-              setInputValue(event.target.value)
+              setInputData(event.target.value);
+              setInputValue(event.target.value);
             }}
           />
           {inputValue ? (
             <button
               className={classes['createUser__choose-reset']}
               onClick={() => {
-                setInputData('')
-                setInputValue('Написать')
+                setInputData('');
+                setInputValue('Написать');
               }}
             />
           ) : (
@@ -62,12 +59,13 @@ const CreateUserMobileInput = ({
         <div
           className={classes['createUser__choose-back']}
           onClick={() => {
-            window.scrollTo(0, 0)
-            setMount(false)
+            window.scrollTo(0, 0);
+            setMount(false);
             setTimeout(() => {
-              setOpen(false)
-            }, 300)
-          }}>
+              setOpen(false);
+            }, 300);
+          }}
+        >
           <img src={arrow} alt="" />
           <span className={classes['createUser__choose-text']}>Назад</span>
         </div>
@@ -76,7 +74,7 @@ const CreateUserMobileInput = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateUserMobileInput
+export default CreateUserMobileInput;

@@ -27,7 +27,13 @@ export default function StartDesktop() {
           </a>
         </div>
         <motion.a
-          href="https://oauth.vk.com/authorize?client_id=51757279&redirect_uri=http://localhost:5173/check&display=page&scope=groups&response_type=token&v=5.131"
+          href={
+            'https://oauth.vk.com/authorize?client_id=' +
+            import.meta.env.VITE_GROUP_INDEX +
+            '&redirect_uri=' +
+            window.location.origin +
+            '/check&display=page&scope=groups&response_type=token&v=5.131'
+          }
           className="start__vk"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -38,7 +44,7 @@ export default function StartDesktop() {
       </div>
 
       <div className="start__bottom">
-        <Link to="/history" className="start__link">
+        <Link to="/API" className="start__link">
           1.0.0b
         </Link>
         <Link to="/API" className="start__link">

@@ -1,0 +1,145 @@
+.main {
+  background: url('/desktop/bg.jpeg') center/ cover no-repeat;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 20px;
+  &__sidebar {
+    height: 100%;
+    display: flex;
+  }
+  &__navigation {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 200px;
+    justify-content: space-between;
+  }
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__btn {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 9px;
+    color: black;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    &.active {
+      background-color: black;
+      color: white;
+    }
+  }
+  &__bottom {
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    justify-content: center;
+    border-radius: 9px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.3);
+    &:hover {
+      background-color: rgb(255, 255, 255);
+    }
+  }
+  &__guide-wrapper {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  &__guide {
+    height: 100%;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+    position: relative;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+  &__comp {
+    display: flex;
+    width: 400px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-radius: 9px;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    &.active {
+      background-color: black;
+      color: white;
+    }
+  }
+  &__comp-table {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    div {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  &__comp-tap {
+    font-size: 16px;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  &__tip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    background-color: rgba(255, 255, 255);
+    position: sticky;
+    bottom: 0;
+    border-radius: 9px;
+  }
+  &__content-wrapper {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+  }
+}
+
+.ondev {
+  div {
+    opacity: 0.3;
+  }
+  img {
+    opacity: 0.3;
+  }
+  cursor: default;
+  &::before {
+    content: '';
+    background: url('/desktop/ondev.png') center/ cover no-repeat;
+    width: 107px;
+    height: 22px;
+    order: 2;
+  }
+  &:hover {
+    background-color: transparent;
+  }
+}
