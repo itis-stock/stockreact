@@ -1,13 +1,13 @@
 import classes from "./modules/CheckMobile.module.scss";
-import logo from "../../public/mobile/logo.svg";
-import rooster from "../../public/mobile/rooster.svg";
+import logo from "./images/logo.svg";
+import rooster from "./images/rooster.svg";
 export default function CheckMobile() {
   return (
     <div className={classes["check"]}>
-      <div className={classes["check__logo"]}>
-        <img src={logo} alt="" />
-      </div>
       <div className={classes["check__info"]}>
+        <div className={classes["check__logo"]}>
+          <img src={logo} alt="" />
+        </div>
         <span className={classes["check__info-title"]}>
           Устанавливаем git...
         </span>
