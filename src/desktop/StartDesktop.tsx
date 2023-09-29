@@ -1,6 +1,5 @@
-import React from 'react';
 import './scss/StartDesktop.scss';
-import logo from '/desktop/logo.png';
+import logo from './images/logo.png';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 export default function StartDesktop() {
@@ -9,11 +8,7 @@ export default function StartDesktop() {
       <div className="start__wrapper">
         <img src={logo} alt="logo" className="start__logo" />
         <div className="start__content">
-          <div className="start__tip start__tip-what">Что?</div>
-          <div className="start__tip start__tip-why">Зачем?</div>
-          <div className="start__content-item">
-            Хз, что тут объяснять. Твердо и четко. Новый сток
-          </div>
+          <div className="start__content-item">Твердо и четко. Новый сток</div>
           <div className="start__content-item">Просто потому что могу и мне похуй в принципе</div>
           <div className="start__content-item">
             <span>Ты можешь разработать буквально все, что ты захочешь на основе моего API</span>
@@ -30,10 +25,6 @@ export default function StartDesktop() {
           <a href="https://t.me/lld4n" className="start__socials-item">
             Telegram разработчика
           </a>
-          <div className="start__tip start__tip-github">
-            Создавай свои проекты на основе stockAPI
-          </div>
-          <div className="start__tip start__tip-telegram">24 на 7, 7 дней в неделю онлайн</div>
         </div>
         <motion.a
           href="https://oauth.vk.com/authorize?client_id=51757279&redirect_uri=http://localhost:5173/check&display=page&scope=groups&response_type=token&v=5.131"

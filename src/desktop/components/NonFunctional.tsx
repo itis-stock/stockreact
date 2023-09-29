@@ -1,6 +1,6 @@
 import React from 'react';
 import '../scss/NonFunctional.scss';
-import logo from '/desktop/logo.png';
+import logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
 
 type NonFunctionalPropsType = {
