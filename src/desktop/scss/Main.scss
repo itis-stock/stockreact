@@ -11,6 +11,7 @@
   }
   &__navigation {
     padding: 20px;
+    font-size: 16px;
   }
   &__navigation-wrapper {
     height: 100%;
@@ -19,7 +20,10 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 200px;
+    width: 150px;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
   }
   &__navigation-item {
     border-radius: 9px;
@@ -46,7 +50,8 @@
     position: relative;
   }
   &__buttons-wrapper {
-    width: 400px;
+    max-width: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -107,7 +112,8 @@
     justify-content: center;
     align-items: flex-start;
     div {
-      width: 250px;
+      max-width: 250px;
+      width: 100%;
       text-wrap: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -144,6 +150,25 @@
     border-radius: 5px;
     width: auto !important;
     background: linear-gradient(97deg, #ff5f6d 0%, #ffc371 100%);
+  }
+  &__content {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    flex: 1;
+  }
+  &__content-wrapper {
+    height: 100%;
+    max-height: calc(100vh - 40px);
+    overflow: auto;
+    background-color: #1c1c1e;
+    border-radius: 20px;
+    color: white;
+    &.center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
   }
 }
 
