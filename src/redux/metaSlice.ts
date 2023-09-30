@@ -4,7 +4,7 @@ const metaSlice = createSlice({
   name: 'meta',
   initialState: null,
   reducers: {
-    setMeta: (state, action) => {
+    setMeta: (_, action) => {
       return action.payload;
     },
   },
