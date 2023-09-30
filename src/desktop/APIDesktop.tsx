@@ -1,9 +1,9 @@
 import React from 'react';
-import NonFunctional from './components/NonFunctional';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './scss/API.scss';
 import { apiType } from '../@types';
+import APISidebarSkeleton from './components/Skeleton';
 
 export default function APIDesktop() {
   const [api, setApi] = React.useState<apiType[]>([]);
@@ -22,7 +22,29 @@ export default function APIDesktop() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (api.length === 0) {
-    return <NonFunctional err={false} />;
+    return (
+      <div className="api-desktop">
+        <div className="api-desktop__sidebar">
+          {[...new Array(7)].map(() => (
+            <APISidebarSkeleton width={260} height={44} radius={9} />
+          ))}
+          <Link to="/" className="api-desktop__go">
+            Вернуться домой
+          </Link>
+        </div>
+        <div className="api-desktop__wrapper">
+          <div className="api-desktop__content">
+            <div className="api-desktop__subtitle">
+              <APISidebarSkeleton width={200} height={50} radius={9} />
+            </div>
+            {[...new Array(7)].map((_, i) => (
+              <APISidebarSkeleton width={300 + i * 10} height={50} radius={9} />
+            ))}
+            <APISidebarSkeleton width={150} height={30} radius={9} />
+          </div>
+        </div>
+      </div>
+    );
   }
   return (
     <div className="api-desktop">

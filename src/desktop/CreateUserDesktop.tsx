@@ -7,6 +7,7 @@ import { setMeta } from '../redux/metaSlice';
 import Select from '../components/Select/Select';
 import qs from 'qs';
 import { bufferType, metaType } from '../@types';
+import Skeleton from './components/Skeleton';
 export default function CreateUserDesktop() {
   const [telegramValue, setTelegramValue] = React.useState('');
   const [displayName, setDisplayName] = React.useState('');
@@ -98,7 +99,7 @@ export default function CreateUserDesktop() {
                   func={(c) => setGroup(c)}
                 />
               ) : (
-                <div className="create-user__text">Ожидаем ответ с базы данных</div>
+                <Skeleton width={111} height={34} radius={9} />
               )}
             </div>
           </div>
