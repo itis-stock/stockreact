@@ -1,27 +1,33 @@
 import React from 'react';
-import MainButtons from './components/MainButtons';
 import './scss/Main.scss';
 import { setMeta } from '../redux/metaSlice';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import MainGuide from './components/MainGuide';
-import { metaType, userType } from '../@types';
+import { metaType, teachersType, userType } from '../@types';
+import MainNavigation from './components/MainNavigation';
+import MainButtons from './components/MainButtons';
+
+export type buttonsId = 'exams' | 'tests' | 'docs' | null;
+
 export default function MainDesktop() {
-  const [teachers, setTeachers] = React.useState();
+  const [teachers, setTeachers] = React.useState<teachersType | null>(null);
   const [user, setUser] = React.useState<userType>();
-  const [selectedId, setSelectedId] = React.useState<
-    'exams' | 'tests' | 'docs' | 'API' | 'history' | null
-  >('tests');
+  const [buttonsKey, setButtonsKey] = React.useState<buttonsId>(null);
+  const [posts, setPosts] = React.useState<string[]>([]);
   const navigate = useNavigate();
   const meta = useSelector((state: metaType) => state);
   const dispatch = useDispatch();
+  // console.group('POSTS');
+  // console.log(posts);
+  // console.groupEnd();
   async function gettingMeta() {
     const data = (await axios.get('https://stockapi.netlify.app/api/meta.getActual')).data;
     if (data.response.data) {
       dispatch(setMeta(data.response.data));
     }
   }
+
   async function gettingTeachers(fb_id: string) {
     const data = (await axios.get('https://stockapi.netlify.app/api/teachers.get?fb_id=' + fb_id))
       .data;
@@ -29,6 +35,8 @@ export default function MainDesktop() {
       setTeachers(data.response.data);
     }
   }
+  console.log(posts);
+
   React.useEffect(() => {
     if (!meta) {
       gettingMeta();
@@ -49,21 +57,19 @@ export default function MainDesktop() {
   return (
     <div className="main">
       <div className="main__sidebar">
-        <div className="main__navigation">
-          <MainButtons func={(id) => setSelectedId(id)} />
-          <button className="main__bottom">Свернуть</button>
-        </div>
-        <div className="main__guide-wrapper">
-          <MainGuide
-            id={selectedId}
-            teachers={teachers || null}
-            meta={meta}
-            func={(list) => console.log(list)}
-          />
-        </div>
-      </div>
-      <div className="main__content-wrapper">
-        <div className="main__content"></div>
+        <MainNavigation
+          func={(c) => {
+            setButtonsKey(c);
+            setPosts([]);
+          }}
+          selectedButton={buttonsKey}
+        />
+        <MainButtons
+          func={(c) => setPosts(c)}
+          meta={meta}
+          teachers={teachers}
+          buttonsKey={buttonsKey}
+        />
       </div>
     </div>
   );

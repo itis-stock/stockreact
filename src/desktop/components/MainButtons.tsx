@@ -1,69 +1,146 @@
 import React from 'react';
-import account from '../images/account.png';
-import added from '../images/added.png';
-import api from '../images/api.png';
-import docs from '../images/docs.png';
-import exams from '../images/exams.png';
-import history from '../images/history.png';
-import search from '../images/search.png';
-import tests from '../images/tests.png';
-import { Link } from 'react-router-dom';
-
-const buttons: {
-  img: string;
-  title: string;
-  id: 'exams' | 'tests' | 'docs' | 'API' | 'history' | null;
-  ondev: boolean;
-  link: boolean;
-}[] = [
-  { img: tests, title: 'Сливы кр', id: 'tests', ondev: false, link: false },
-  { img: exams, title: 'Сливы экзаменов', id: 'exams', ondev: false, link: false },
-  { img: docs, title: 'Документы', id: 'docs', ondev: false, link: false },
-  { img: api, title: 'API', id: 'API', ondev: false, link: true },
-  { img: history, title: '1.0.0', id: 'history', ondev: false, link: true },
-  { img: account, title: 'Аккаунт', id: null, ondev: true, link: false },
-  { img: added, title: 'Добавление', id: null, ondev: true, link: false },
-  { img: search, title: 'Общий поиск', id: null, ondev: true, link: false },
-];
+import { metaType, teachersType } from '../../@types';
+import { buttonsId } from '../MainDesktop';
+import joinTeachers from '../../utils/joinTeachers';
+import getSemestr from '../../utils/getSemestr';
+import MainButtonsHint from './MainButtonsHint';
+import MainButtonsItemDocs from './MainButtonsItemDocs';
+import MainButtonItem from './MainButtonItem';
 type MainButtonsPropsType = {
-  func: (index: 'exams' | 'tests' | 'docs' | 'API' | 'history' | null) => void;
+  meta: metaType;
+  teachers: teachersType | null;
+  buttonsKey: buttonsId;
+  func: (posts: string[]) => void;
 };
-export default function MainButtons({ func }: MainButtonsPropsType) {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-  return (
-    <div className="main__buttons">
-      {buttons.map((el, i) => {
-        if (el.link) {
-          return (
-            <Link to={'/' + el.id} className="main__btn" key={i}>
-              <img src={el.img} />
-              <div>{el.title}</div>
-            </Link>
-          );
-        } else {
-          return (
-            <div
-              className={
-                el.ondev
-                  ? 'main__btn ondev'
-                  : i === selectedIndex
-                  ? 'main__btn active'
-                  : 'main__btn'
-              }
-              key={i}
-              onClick={() => {
-                if (!el.ondev) {
-                  setSelectedIndex(i);
-                  func(el.id);
-                }
-              }}
-            >
-              <img src={el.img} />
-              <div>{el.title}</div>
-            </div>
-          );
+export default function MainButtons({ meta, teachers, buttonsKey, func }: MainButtonsPropsType) {
+  const [relevantIdDocs, setRelevantIdDocs] = React.useState<string[]>([]);
+  const [relevantId, setRelevantId] = React.useState<string[]>([]);
+
+  const [selectedIdDocs, setSelectedIdDocs] = React.useState('');
+  const [selectedId, setSelectedId] = React.useState('');
+
+  React.useEffect(() => {
+    setSelectedId('');
+    setSelectedIdDocs('');
+    const teachersJoin: string[] = [];
+    if (teachers) {
+      if (buttonsKey === 'docs' || buttonsKey === 'exams') {
+        teachers.lecture.map((el) => {
+          teachersJoin.push(joinTeachers(teachers.course, getSemestr(), el.subject, el.name));
+        });
+      } else if (buttonsKey === 'tests') {
+        teachers.practice.map((el) => {
+          teachersJoin.push(joinTeachers(teachers.course, getSemestr(), el.subject, el.name));
+        });
+      }
+    }
+    if (meta && buttonsKey === 'docs') {
+      const relevantIdDocsBuffer: string[] = [];
+      meta['docs'].map((el) => {
+        if (el.course && el.semestr && el.subject && el.teacher) {
+          if (teachersJoin.includes(joinTeachers(el.course, el.semestr, el.subject, el.teacher))) {
+            relevantIdDocsBuffer.push(el.fb_id);
+          }
         }
-      })}
-    </div>
-  );
+      });
+      setRelevantIdDocs(relevantIdDocsBuffer);
+
+      // console.log(meta['docs']);
+    } else if (meta && (buttonsKey === 'exams' || buttonsKey === 'tests')) {
+      const relevantIdBuffer: string[] = [];
+      Object.keys(meta[buttonsKey]).map((el) => {
+        const elem = el.split('-');
+        if (
+          teachersJoin.includes(joinTeachers(Number(elem[0]), Number(elem[1]), elem[2], elem[3]))
+        ) {
+          relevantIdBuffer.push(el);
+        }
+      });
+      setRelevantId(relevantIdBuffer);
+    }
+  }, [buttonsKey, meta, teachers]);
+
+  if (!buttonsKey || !meta || !teachers) {
+    return <></>;
+  }
+
+  if (buttonsKey === 'docs') {
+    return (
+      <div className="main__buttons">
+        <div className="main__buttons-wrapper">
+          <MainButtonsHint text="Релевантные результаты" count={relevantIdDocs.length} />
+          {meta['docs'].map((el, i) => {
+            if (relevantIdDocs.includes(el.fb_id)) {
+              return (
+                <MainButtonsItemDocs
+                  key={i}
+                  doc={el}
+                  func={func}
+                  setSelectedIdDocs={setSelectedIdDocs}
+                  selectedIdDocs={selectedIdDocs}
+                />
+              );
+            }
+          })}
+          <MainButtonsHint
+            text="Остальные результаты"
+            count={meta['docs'].length - relevantIdDocs.length}
+          />
+          {meta['docs'].map((el, i) => {
+            if (!relevantIdDocs.includes(el.fb_id)) {
+              return (
+                <MainButtonsItemDocs
+                  key={i}
+                  doc={el}
+                  func={func}
+                  setSelectedIdDocs={setSelectedIdDocs}
+                  selectedIdDocs={selectedIdDocs}
+                />
+              );
+            }
+          })}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="main__buttons">
+        <div className="main__buttons-wrapper">
+          <MainButtonsHint text="Релевантные результаты" count={relevantId.length} />
+          {Object.keys(meta[buttonsKey]).map((el, i) => {
+            if (relevantId.includes(el)) {
+              return (
+                <MainButtonItem
+                  key={i}
+                  list={meta[buttonsKey][el]}
+                  ke={el}
+                  func={func}
+                  setSelectedId={setSelectedId}
+                  selectedId={selectedId}
+                />
+              );
+            }
+          })}
+          <MainButtonsHint
+            text="Остальные результаты"
+            count={Object.keys(meta[buttonsKey]).length - relevantId.length}
+          />
+          {Object.keys(meta[buttonsKey]).map((el, i) => {
+            if (!relevantId.includes(el)) {
+              return (
+                <MainButtonItem
+                  key={i}
+                  list={meta[buttonsKey][el]}
+                  ke={el}
+                  func={func}
+                  setSelectedId={setSelectedId}
+                  selectedId={selectedId}
+                />
+              );
+            }
+          })}
+        </div>
+      </div>
+    );
+  }
 }
