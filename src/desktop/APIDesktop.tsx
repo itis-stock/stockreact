@@ -38,7 +38,7 @@ export default function APIDesktop() {
               <APISidebarSkeleton width={200} height={50} radius={9} />
             </div>
             {[...new Array(7)].map((_, i) => (
-              <APISidebarSkeleton width={300 + i * 10} height={50} radius={9} />
+              <APISidebarSkeleton width={300 + i * 10} height={50} radius={9} key={i} />
             ))}
             <APISidebarSkeleton width={150} height={30} radius={9} />
           </div>
@@ -70,19 +70,31 @@ export default function APIDesktop() {
       </div>
       <div className="api-desktop__wrapper">
         <div className="api-desktop__content">
-          {api[selectedIndex].content.map((el) => {
+          {api[selectedIndex].content.map((el, i) => {
             if (el.type === 'subtitle') {
-              return <div className="api-desktop__subtitle">{String(el.item)}</div>;
+              return (
+                <div key={i} className="api-desktop__subtitle">
+                  {String(el.item)}
+                </div>
+              );
             } else if (el.type === 'subsubtitle') {
-              return <div className="api-desktop__subsubtitle">{String(el.item)}</div>;
+              return (
+                <div key={i} className="api-desktop__subsubtitle">
+                  {String(el.item)}
+                </div>
+              );
             } else {
               return (
-                <div className="api-desktop__text">
-                  {el.item.map((e) => {
+                <div key={i} className="api-desktop__text">
+                  {el.item.map((e, i) => {
                     if (e.highlight) {
-                      return <span className="api-desktop__highlight">{e.text}</span>;
+                      return (
+                        <span key={i} className="api-desktop__highlight">
+                          {e.text}
+                        </span>
+                      );
                     } else {
-                      return <span>{e.text.replace('\t', '  ')}</span>;
+                      return <span key={i}>{e.text.replace('\t', '  ')}</span>;
                     }
                   })}
                 </div>

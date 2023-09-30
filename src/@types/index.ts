@@ -13,6 +13,7 @@ type apiContentItemType = {
 };
 
 export type metaType = {
+  docs: docsType[];
   exams: any;
   tests: any;
   teachers: docsType[];
@@ -26,7 +27,7 @@ type groupsType = {
   teacher: string;
 };
 
-type docsType = {
+export type docsType = {
   course: number | null;
   semestr: number | null;
   subject: string | null;
