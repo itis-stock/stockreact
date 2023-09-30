@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { metaType, teachersType, userType } from '../@types';
 import MainNavigation from './components/MainNavigation';
 import MainButtons from './components/MainButtons';
+import MainContent from './components/MainContent';
 
 export type buttonsId = 'exams' | 'tests' | 'docs' | null;
 
@@ -27,7 +28,7 @@ export default function MainDesktop() {
       dispatch(setMeta(data.response.data));
     }
   }
-
+  console.log(posts);
   async function gettingTeachers(fb_id: string) {
     const data = (await axios.get('https://stockapi.netlify.app/api/teachers.get?fb_id=' + fb_id))
       .data;
@@ -35,7 +36,6 @@ export default function MainDesktop() {
       setTeachers(data.response.data);
     }
   }
-  console.log(posts);
 
   React.useEffect(() => {
     if (!meta) {
@@ -71,6 +71,7 @@ export default function MainDesktop() {
           buttonsKey={buttonsKey}
         />
       </div>
+      <MainContent posts={posts} buttonsKey={buttonsKey} />
     </div>
   );
 }
