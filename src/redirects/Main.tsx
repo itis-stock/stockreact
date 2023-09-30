@@ -1,7 +1,7 @@
 import MainDesktop from '../desktop/MainDesktop';
 import MainMobile from '../mobile/MainMobile';
 import isMobile from '../utils/isMobile';
-
+console.log(import.meta.env.VITE_FLAG_DEV);
 export default function Start() {
   if (import.meta.env.VITE_FLAG_DEV === '1') {
     return <MainDesktop />;
