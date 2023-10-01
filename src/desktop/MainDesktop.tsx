@@ -8,7 +8,7 @@ import { metaType, teachersType, userType } from '../@types';
 import MainNavigation from './components/MainNavigation';
 import MainButtons from './components/MainButtons';
 import MainContent from './components/MainContent';
-
+import arrowleft from './images/arrowleft.svg';
 export type buttonsId = 'exams' | 'tests' | 'docs' | null;
 
 export default function MainDesktop() {
@@ -16,6 +16,8 @@ export default function MainDesktop() {
   const [user, setUser] = React.useState<userType>();
   const [buttonsKey, setButtonsKey] = React.useState<buttonsId>(null);
   const [posts, setPosts] = React.useState<string[]>([]);
+
+  const [roll, setRoll] = React.useState(false);
   const navigate = useNavigate();
   const meta = useSelector((state: metaType) => state);
   const dispatch = useDispatch();
@@ -28,7 +30,8 @@ export default function MainDesktop() {
       dispatch(setMeta(data.response.data));
     }
   }
-  console.log(posts);
+  console.log(meta, teachers);
+
   async function gettingTeachers(fb_id: string) {
     const data = (await axios.get('https://stockapi.netlify.app/api/teachers.get?fb_id=' + fb_id))
       .data;
@@ -36,6 +39,10 @@ export default function MainDesktop() {
       setTeachers(data.response.data);
     }
   }
+  React.useEffect(() => {
+    dispatch(setMeta(null));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   React.useEffect(() => {
     if (!meta) {
@@ -56,22 +63,30 @@ export default function MainDesktop() {
   }, [meta]);
   return (
     <div className="main">
-      <div className="main__sidebar">
-        <MainNavigation
-          func={(c) => {
-            setButtonsKey(c);
-            setPosts([]);
-          }}
-          selectedButton={buttonsKey}
-        />
-        <MainButtons
-          func={(c) => setPosts(c)}
-          meta={meta}
-          teachers={teachers}
-          buttonsKey={buttonsKey}
-        />
+      <div className={roll ? 'main__roll rotate' : 'main__roll'} onClick={() => setRoll(!roll)}>
+        <img src={arrowleft} />
       </div>
-      <MainContent posts={posts} buttonsKey={buttonsKey} />
+      {!roll ? (
+        <div className="main__sidebar">
+          <MainNavigation
+            func={(c) => {
+              setButtonsKey(c);
+              setPosts([]);
+            }}
+            selectedButton={buttonsKey}
+          />
+          <MainButtons
+            func={(c) => setPosts(c)}
+            meta={meta}
+            teachers={teachers}
+            buttonsKey={buttonsKey}
+          />
+        </div>
+      ) : (
+        ''
+      )}
+
+      <MainContent posts={posts} buttonsKey={buttonsKey} roll={roll} />
     </div>
   );
 }

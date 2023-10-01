@@ -67,14 +67,14 @@ export default function MainButtons({ meta, teachers, buttonsKey, func }: MainBu
     return (
       <div className="main__buttons">
         <div className="main__buttons-wrapper">
-          <Skeleton width={440} height={20} radius={9} />
-          <Skeleton width={440} height={80} radius={9} />
-          <Skeleton width={440} height={80} radius={9} />
-          <Skeleton width={440} height={20} radius={9} />
-          <Skeleton width={440} height={80} radius={9} />
-          <Skeleton width={440} height={80} radius={9} />
-          <Skeleton width={440} height={80} radius={9} />
-          <Skeleton width={440} height={80} radius={9} />
+          <Skeleton width={400} height={40} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={40} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
         </div>
       </div>
     );
