@@ -5,6 +5,9 @@ import arrow from "../../images/arrowright.svg";
 import arrowDisabled from "../../images/arrowdisabled.svg";
 import rooster from "../../images/rooster.svg";
 import React from "react";
+import axios from "axios";
+import qs from "qs";
+import { useNavigate } from "react-router-dom";
 
 const CreateUserMobileMain = ({
   setOpenTelegramModal,
@@ -35,6 +38,7 @@ const CreateUserMobileMain = ({
   const id_vk: string = JSONBuffer.id;
   const name_vk: string = JSONBuffer.fullname;
   const vk_photo: string = JSONBuffer.photo;
+  const navigate = useNavigate();
   function checkString(str: string): string {
     if (str.length >= 41) return "";
     if (window.innerWidth <= 500) {
@@ -51,6 +55,40 @@ const CreateUserMobileMain = ({
         str = str.slice(0, 20) + "...";
         return str;
       }
+    }
+  }
+  function check(group: string, telegram: string): boolean {
+    return group !== "Выбрать" && telegram !== "Написать";
+  }
+  async function postInfo(): Promise<void> {
+    if (check(group, telegramName)) {
+      const dataPost = {
+        id: JSONBuffer?.id,
+        id_vk: JSONBuffer?.id,
+        name_vk: JSONBuffer?.fullname,
+        telegram_nickname: telegramName,
+        group: group,
+        photo_url: JSONBuffer?.photo,
+        display_name: name || JSONBuffer?.fullname,
+        description: description,
+      };
+      if (name === "Написать") dataPost["display_name"] = JSONBuffer?.fullname;
+      if (description === "Написать") dataPost["description"] = "";
+      console.log(dataPost);
+      const data = await axios.post(
+        "https://stockapi.netlify.app/api/users.post",
+        qs.stringify(dataPost),
+        {
+          headers: {
+            master_key: import.meta.env.VITE_MASTER_KEY,
+            "content-type": "application/x-www-form-urlencoded",
+          },
+        },
+      );
+      console.log(data.data);
+      localStorage.removeItem("buffer");
+      localStorage.setItem("user", JSON.stringify(dataPost));
+      navigate("/main");
     }
   }
 
@@ -76,7 +114,7 @@ const CreateUserMobileMain = ({
           >
             <span className={classes["createUser__item-name"]}>Telegram</span>
             <span className={classes["createUser__item-value"]}>
-              {telegramName}
+              {checkString(telegramName)}
             </span>
             <img src={arrow} alt="arrow" />
             <span className={classes["start__line"]}></span>
@@ -152,9 +190,19 @@ const CreateUserMobileMain = ({
           </div>
         </div>
       </div>
-      <button type="submit" className={classes["createUser__button"]}>
+      <div
+        onClick={postInfo}
+        className={
+          check(group, telegramName)
+            ? classes["createUser__button"]
+            : [
+                classes["createUser__button"],
+                classes["createUser__inactiveButton"],
+              ].join(" ")
+        }
+      >
         Принять
-      </button>
+      </div>
       <img src={rooster} alt="" />
     </div>
   );

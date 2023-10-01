@@ -63,3 +63,50 @@ type teachersElementType = {
   name: string;
   subject: string;
 };
+
+export type documentType = {
+  url: string;
+  year: number;
+  author_id: number;
+  course: number | null;
+  semestr: number | null;
+  teacher: string | null;
+  subject: string | null;
+  date: number;
+  title: string | null;
+  likes: number;
+  special: boolean;
+};
+
+export type postType = {
+  year: number;
+  author_id: number;
+  course: number;
+  semestr: number;
+  teacher: string;
+  subject: string;
+  date: number;
+  text: string;
+  likes: number;
+  attachments: attachmentsType[];
+  special: boolean;
+};
+
+export type attachmentsType = {
+  type: 'photo' | 'doc';
+  photo?: photoType[];
+  doc?: docType;
+};
+
+type photoType = {
+  height: number;
+  width: number;
+  url: string;
+};
+
+type docType = {
+  title: string;
+  size: number;
+  ext: string;
+  url: string;
+};

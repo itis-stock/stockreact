@@ -6,6 +6,7 @@ import getSemestr from '../../utils/getSemestr';
 import MainButtonsHint from './MainButtonsHint';
 import MainButtonsItemDocs from './MainButtonsItemDocs';
 import MainButtonItem from './MainButtonItem';
+import Skeleton from './Skeleton';
 type MainButtonsPropsType = {
   meta: metaType;
   teachers: teachersType | null;
@@ -59,9 +60,24 @@ export default function MainButtons({ meta, teachers, buttonsKey, func }: MainBu
       setRelevantId(relevantIdBuffer);
     }
   }, [buttonsKey, meta, teachers]);
-
-  if (!buttonsKey || !meta || !teachers) {
+  if (!buttonsKey) {
     return <></>;
+  }
+  if (!meta || !teachers) {
+    return (
+      <div className="main__buttons">
+        <div className="main__buttons-wrapper">
+          <Skeleton width={400} height={40} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={40} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+          <Skeleton width={400} height={80} radius={9} />
+        </div>
+      </div>
+    );
   }
 
   if (buttonsKey === 'docs') {
