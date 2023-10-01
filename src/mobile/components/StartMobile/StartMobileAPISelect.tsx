@@ -25,7 +25,12 @@ const StartMobileApiSelect = ({
           : [classes["api"], classes["api-inactive"]].join(" ")
       }
     >
-      <h1 className={classes["createUser__select-title"]}>{title}</h1>
+      <h1
+        className={classes["createUser__select-title"]}
+        style={{ paddingTop: 10 }}
+      >
+        {title}
+      </h1>
       <div className={classes["createUser__select-form"]}>
         <div className={classes["createUser__select-block"]}>
           <div className={classes["createUser__api-info"]}>
@@ -66,7 +71,10 @@ const StartMobileApiSelect = ({
         </div>
       </div>
 
-      <div className={classes["createUser__choose-footer"]}>
+      <div
+        className={classes["createUser__choose-footer"]}
+        style={{ paddingBottom: 10 }}
+      >
         <div
           className={classes["createUser__choose-back"]}
           onClick={() => {
