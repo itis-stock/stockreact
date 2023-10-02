@@ -1,0 +1,13 @@
+.list {
+  display: flex;
+  padding-left: 20px;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 9px;
+  background: #1c1c1e;
+  &__separator {
+    height: 1px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
