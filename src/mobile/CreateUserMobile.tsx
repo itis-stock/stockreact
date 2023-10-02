@@ -1,106 +1,110 @@
-/* eslint-disable */
-
-import classes from "./modules/CreateUser.module.scss";
-import React, { useEffect, useState } from "react";
-import CreateUserMobileMain from "./components/CreateUser/CreateUserMobileMain.tsx";
-import CreateUserMobileInput from "./components/CreateUser/CreateUserMobileInput.tsx";
-import CreateUserMobileSelect from "./components/CreateUser/CreateUserMobileSelect.tsx";
-import CreateUserMobileCourse from "./components/CreateUser/CreateUserMobileCourse.tsx";
-import axios from "axios";
+import classes from './modules/CreateUser.module.scss';
+import React, { useEffect, useState } from 'react';
+import CreateUserMobileMain from './components/CreateUser/CreateUserMobileMain.tsx';
+import CreateUserMobileInput from './components/CreateUser/CreateUserMobileInput.tsx';
+import CreateUserMobileSelect from './components/CreateUser/CreateUserMobileSelect.tsx';
+import CreateUserMobileCourse from './components/CreateUser/CreateUserMobileCourse.tsx';
+import axios from 'axios';
+import Modal from './components/Modal.tsx';
+import { groupsType, metaType } from '../@types/index.ts';
 
 export default function CreateUserMobile() {
-  const [openTelegramModal, setOpenTelegramModal] = React.useState(false);
-  const [openDescriptionModal, setOpenDescriptionModal] = React.useState(false);
-  const [openNameModal, setOpenNameModal] = React.useState(false);
-  const [name, setName] = React.useState("Написать");
-  const [description, setDescription] = React.useState("Написать");
-  const [telegramName, setTelegramName] = React.useState("Написать");
-  const [openGroupModal, setOpenGroupModal] = React.useState(false);
-  const [openCourseModal, setOpenCourseModal] = React.useState(false);
-  const [group, setGroup] = React.useState("Выбрать");
-  const [groups, setGroups] = React.useState([]);
-  const [activeItem, setActiveItem] = useState(null);
-  const [course, setCourse] = useState("Выбрать");
-  const courses = ["1 курс", "2 курс", "3 курс", "4 курс"];
+  const [openModal, setOpenModal] = React.useState<
+    'telegram' | 'course' | 'description' | 'group' | 'name' | null
+  >(null);
+
+  const [name, setName] = React.useState('Написать');
+  const [description, setDescription] = React.useState('Написать');
+  const [telegramName, setTelegramName] = React.useState('Написать');
+
+  const [groups, setGroups] = React.useState<groupsType[]>([]);
+  const [group, setGroup] = React.useState('Выбрать');
+
+  const [course, setCourse] = useState('Выбрать');
+  const courses = ['1 курс', '2 курс', '3 курс', '4 курс'];
   useEffect(() => {
     const getGroups = async () => {
-      const response = await axios.get(
-        "https://stockapi.netlify.app/api/meta.getActual",
-      );
-      setGroups(response.data.response.data.groups);
+      const response = await axios.get('https://stockapi.netlify.app/api/meta.getActual');
+      const metaBuffer: metaType = response.data.response.data;
+      setGroups(metaBuffer.groups);
     };
     getGroups();
   }, []);
   return (
-    <div className={classes["create"]}>
-      <CreateUserMobileMain
-        setOpenTelegramModal={setOpenTelegramModal}
-        setOpenCourseModal={setOpenCourseModal}
-        setOpenGroupModal={setOpenGroupModal}
-        setOpenNameModal={setOpenNameModal}
-        setOpenDescriptionModal={setOpenDescriptionModal}
-        telegramName={telegramName}
-        group={group}
-        course={course}
-        name={name}
-        description={description}
-      />
-      {openTelegramModal ? (
-        <CreateUserMobileInput
-          inputValue={telegramName}
-          setOpen={setOpenTelegramModal}
-          setInputValue={setTelegramName}
-          title={"Telegram"}
-        />
-      ) : (
-        ""
-      )}
-      {openGroupModal ? (
-        <CreateUserMobileSelect
-          setOpenGroupModal={setOpenGroupModal}
-          setSelectValue={setGroup}
-          setActiveItem={setActiveItem}
-          activeItem={activeItem}
-          groups={groups}
+    <>
+      <div className={classes['create']}>
+        <CreateUserMobileMain
+          setOpenModal={setOpenModal}
+          telegramName={telegramName}
+          group={group}
           course={course}
-          setCourse={setCourse}
+          name={name}
+          description={description}
+        />
+      </div>
+      {openModal === 'telegram' ? (
+        <Modal
+          element={
+            <CreateUserMobileInput inputValue={telegramName} setInputValue={setTelegramName} />
+          }
+          title={'Telegram'}
+          func={(e) => setOpenModal(e)}
         />
       ) : (
-        ""
+        ''
       )}
-      {openCourseModal ? (
-        <CreateUserMobileCourse
-          setOpenCourseModal={setOpenCourseModal}
-          setActiveItem={setActiveItem}
-          activeItem={activeItem}
-          course={course}
-          courses={courses}
-          setCourse={setCourse}
-          setGroup={setGroup}
+      {openModal === 'name' ? (
+        <Modal
+          element={<CreateUserMobileInput inputValue={name} setInputValue={setName} />}
+          title={'Отображаемое имя'}
+          func={(e) => setOpenModal(e)}
         />
       ) : (
-        ""
+        ''
       )}
-      {openNameModal ? (
-        <CreateUserMobileInput
-          inputValue={name}
-          setOpen={setOpenNameModal}
-          setInputValue={setName}
-          title={"Отображаемое имя"}
+      {openModal === 'course' ? (
+        <Modal
+          element={
+            <CreateUserMobileCourse
+              course={course}
+              courses={courses}
+              setCourse={setCourse}
+              setGroup={setGroup}
+            />
+          }
+          title={'Курс'}
+          func={(e) => setOpenModal(e)}
         />
       ) : (
-        ""
+        ''
       )}
-      {openDescriptionModal ? (
-        <CreateUserMobileInput
-          inputValue={description}
-          setOpen={setOpenDescriptionModal}
-          setInputValue={setDescription}
-          title={"Описание"}
+      {openModal === 'group' ? (
+        <Modal
+          element={
+            <CreateUserMobileSelect
+              group={group}
+              setGroup={setGroup}
+              groups={groups}
+              course={course}
+            />
+          }
+          title={'Группа'}
+          func={(e) => setOpenModal(e)}
         />
       ) : (
-        ""
+        ''
       )}
-    </div>
+      {openModal === 'description' ? (
+        <Modal
+          element={
+            <CreateUserMobileInput inputValue={description} setInputValue={setDescription} />
+          }
+          title={'Описание'}
+          func={(e) => setOpenModal(e)}
+        />
+      ) : (
+        ''
+      )}
+    </>
   );
 }
