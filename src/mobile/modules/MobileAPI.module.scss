@@ -1,0 +1,41 @@
+.api {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 10px 10px 0;
+  font-size: 20px;
+  color: white;
+  &__subtitle {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 0 5px 0 0;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  &__subsubtitle,
+  &__highlight {
+    border-radius: 5px;
+    background: #fff;
+    padding: 2px 5px;
+    text-align: center;
+    color: #000000;
+    margin: 0 5px 5px 0;
+    display: inline-block;
+  }
+  &__textBlock {
+    border-radius: 9px;
+    background: #1c1c1e;
+    width: 100%;
+    padding: 20px;
+    margin: 0 0 20px 0;
+  }
+  &__text {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 170%;
+  }
+  &__highlight {
+    line-height: 150%;
+  }
+}

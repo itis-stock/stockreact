@@ -1,38 +1,19 @@
-import classes from '../../modules/CreateUser.module.scss'
-import rooster from '../../images/rooster.svg'
-import arrow from '../../images/arrowleft.svg'
-import React, { useState } from 'react'
+import classes from '../../modules/CreateUser.module.scss';
+import React, { useState } from 'react';
 const CreateUserMobileInput = ({
   inputValue,
-  setOpen,
   setInputValue,
-  title,
 }: {
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-  inputValue: string
-  title: string
-  setInputValue: React.Dispatch<React.SetStateAction<string>>
+  inputValue: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const [inputData, setInputData] = useState(inputValue)
-  const [mount, setMount] = useState(true)
+  const [inputData, setInputData] = useState(inputValue);
   if (inputData === 'Написать') {
-    setInputData('')
+    setInputData('');
   }
 
   return (
-    <div
-      className={
-        mount
-          ? [
-              classes['createUser__choose'],
-              classes['createUser__choose-active'],
-            ].join(' ')
-          : [
-              classes['createUser__choose'],
-              classes['createUser__choose-inactive'],
-            ].join(' ')
-      }>
-      <h1 className={classes['createUser__choose-title']}>{title}</h1>
+    <>
       <div className={classes['createUser__choose-form']}>
         <label className={classes['createUser__choose-label']}>
           <input
@@ -42,17 +23,17 @@ const CreateUserMobileInput = ({
             className={classes['createUser__choose-input']}
             onChange={(event) => {
               if (event.target.value.length <= 40) {
-                setInputData(event.target.value)
-                setInputValue(event.target.value)
+                setInputData(event.target.value);
+                setInputValue(event.target.value);
               }
             }}
           />
-          {inputValue ? (
+          {inputData.length != 0 ? (
             <button
               className={classes['createUser__choose-reset']}
               onClick={() => {
-                setInputData('')
-                setInputValue('Написать')
+                setInputData('');
+                setInputValue('Написать');
               }}
             />
           ) : (
@@ -60,25 +41,8 @@ const CreateUserMobileInput = ({
           )}
         </label>
       </div>
-      <div className={classes['createUser__choose-footer']}>
-        <div
-          className={classes['createUser__choose-back']}
-          onClick={() => {
-            window.scrollTo(0, 0)
-            setMount(false)
-            setTimeout(() => {
-              setOpen(false)
-            }, 300)
-          }}>
-          <img src={arrow} />
-          <span className={classes['createUser__choose-text']}>Назад</span>
-        </div>
-        <div className={'createUser__choose-logo'}>
-          <img src={rooster} alt="rooster" />
-        </div>
-      </div>
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default CreateUserMobileInput
+export default CreateUserMobileInput;
