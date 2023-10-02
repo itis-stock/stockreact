@@ -6,7 +6,7 @@ import CreateUserMobileSelect from './components/CreateUser/CreateUserMobileSele
 import CreateUserMobileCourse from './components/CreateUser/CreateUserMobileCourse.tsx';
 import axios from 'axios';
 import Modal from './components/Modal.tsx';
-import { groupsType, metaType } from '../@types/index.ts';
+import { groupsType, metaType } from '../@types';
 
 export default function CreateUserMobile() {
   const [openModal, setOpenModal] = React.useState<
