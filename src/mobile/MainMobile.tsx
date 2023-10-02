@@ -20,7 +20,6 @@ export default function MainMobile() {
   const [openModal, setOpenModal] = useState<'exams' | 'tests' | 'docs' | 'api' | null>(null);
   return (
     <>
-      {' '}
       <div className={classes['mainMobile']}>
         <h1 className={classes['mainMobile__title']}>Меню</h1>
         <div className={classes['mainMobile__info']}>
