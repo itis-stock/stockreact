@@ -27,6 +27,7 @@ const MainMobileItem = ({ buttonsKey }: { buttonsKey: 'exams' | 'tests' }) => {
       setTeachers(responseTeachers.data.response.data);
     };
     getItems();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -53,6 +54,7 @@ const MainMobileItem = ({ buttonsKey }: { buttonsKey: 'exams' | 'tests' }) => {
       }
     }
     setRelevantKeys(relevantKeysBuffer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, teachers]);
   console.log(relevantKeys);
   return (
