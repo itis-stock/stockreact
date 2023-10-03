@@ -12,7 +12,7 @@ export default function StartMobile() {
   return (
     <>
       <div className={classes['start']}>
-        <img src={logo} />
+        <img src={logo} style={{width: "100px"}}/>
         <div className={classes['start__content']}>
           <div className={classes['start__item']}>
             <div className={classes['start__item-title']}>Что?</div>
