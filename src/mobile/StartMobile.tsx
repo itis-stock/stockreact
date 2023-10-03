@@ -1,13 +1,13 @@
-import classes from './modules/StartMobile.module.scss';
-import logo from './images/logo.svg';
-import arrow from './images/arrowright.svg';
-import React from 'react';
-import Modal from './components/Modal.tsx';
-import MobileAPI from './components/MobileApi/MobileAPI.tsx';
-import List from './components/List.tsx';
+import classes from './modules/StartMobile.module.scss'
+import logo from './images/logo.png'
+import arrow from './images/arrowright.svg'
+import React from 'react'
+import Modal from './components/Modal.tsx'
+import MobileAPI from './components/MobileApi/MobileAPI.tsx'
+import List from './components/List.tsx'
 
 export default function StartMobile() {
-  const [openModal, setOpenModal] = React.useState<'API' | null>(null);
+  const [openModal, setOpenModal] = React.useState<'API' | null>(null)
 
   return (
     <>
@@ -28,14 +28,18 @@ export default function StartMobile() {
           </div>
           <List
             elements={[
-              <a href="https://github.com/itis-stock" className={classes['start__link']}>
+              <a
+                href="https://github.com/itis-stock"
+                className={classes['start__link']}>
                 <div className={classes['start__link-text']}>Github</div>
                 <div className={classes['start__link-icon']}>
                   <img src={arrow} alt="arrow" />
                 </div>
               </a>,
               <a href="https://t.me/lld4n" className={classes['start__link']}>
-                <div className={classes['start__link-text']}>Telegram разработчика</div>
+                <div className={classes['start__link-text']}>
+                  Telegram разработчика
+                </div>
                 <div className={classes['start__link-icon']}>
                   <img src={arrow} alt="arrow" />
                 </div>
@@ -43,8 +47,9 @@ export default function StartMobile() {
             ]}
           />
           <p className={classes['start__info-text']}>
-            Ты можешь разработать своё приложение на основе моего API, будь то Android-приложение
-            или бот для Telegram. Можно создать буквально всё, что ты захочешь.
+            Ты можешь разработать своё приложение на основе моего API, будь то
+            Android-приложение или бот для Telegram. Можно создать буквально
+            всё, что ты захочешь.
           </p>
         </div>
 
@@ -56,9 +61,10 @@ export default function StartMobile() {
             window.location.origin +
             '/check&display=page&scope=groups&response_type=token&v=5.131'
           }
-          className={classes['start__button']}
-        >
-          <span className={classes['start__button-title']}>Продолжить с VK</span>
+          className={classes['start__button']}>
+          <span className={classes['start__button-title']}>
+            Продолжить с VK
+          </span>
           <span className={classes['start__button-text']}>
             Только для тех, кто состоит в оригинальном стоке
           </span>
@@ -70,10 +76,14 @@ export default function StartMobile() {
         </div>
       </div>
       {openModal === 'API' ? (
-        <Modal title="API" element={<MobileAPI />} func={(e) => setOpenModal(e)} />
+        <Modal
+          title="API"
+          element={<MobileAPI />}
+          func={(e) => setOpenModal(e)}
+        />
       ) : (
         ''
       )}
     </>
-  );
+  )
 }

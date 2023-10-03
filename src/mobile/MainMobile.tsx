@@ -1,114 +1,124 @@
-import logo from './images/rooster.svg';
-import search from './images/searchIcon.svg';
-import slivikr from './images/slivikr.svg';
-import sliviexams from './images/sliviexams.svg';
-import documents from './images/documents.svg';
-import apipizza from './images/apipizza.svg';
-import smileAccount from './images/smileAccount.svg';
-import addIcon from './images/addIcon.svg';
+import logo from "./images/rooster.svg";
+import search from "./images/searchIcon.svg";
+import slivikr from "./images/slivikr.svg";
+import sliviexams from "./images/sliviexams.svg";
+import documents from "./images/documents.svg";
+import apipizza from "./images/apipizza.svg";
+import smileAccount from "./images/smileAccount.svg";
+import addIcon from "./images/addIcon.svg";
 
-import classes from './modules/MainMobile.module.scss';
-import MainMobileSelect from './components/MainMobile/MainMobileSelect.tsx';
-import { useState } from 'react';
-import MainMobileDocs from './components/MainMobile/MainMobileDocs.tsx';
-import MainMobileItem from './components/MainMobile/MainMobileItem.tsx';
-import List from './components/List.tsx';
-import Modal from './components/Modal.tsx';
-import MobileAPI from './components/MobileApi/MobileAPI.tsx';
+import classes from "./modules/MainMobile.module.scss";
+import MainMobileSelect from "./components/MainMobile/MainMobileSelect.tsx";
+import { useState } from "react";
+import MainMobileDocs from "./components/MainMobile/MainMobileDocs.tsx";
+import MainMobileTasks from "./components/MainMobile/MainMobileTasks.tsx";
+import List from "./components/List.tsx";
+import Modal from "./components/Modal.tsx";
+import MobileAPI from "./components/MobileApi/MobileAPI.tsx";
 
 export default function MainMobile() {
-  const [openModal, setOpenModal] = useState<'exams' | 'tests' | 'docs' | 'api' | null>(null);
+  const [openModal, setOpenModal] = useState<
+    "exams" | "tests" | "docs" | "api" | null
+  >(null);
   return (
     <>
-      <div className={classes['mainMobile']}>
-        <h1 className={classes['mainMobile__title']}>Меню</h1>
-        <div className={classes['mainMobile__info']}>
-          <div className={classes['mainMobile__blocks']}>
+      <div className={classes["mainMobile"]}>
+        <h1 className={classes["mainMobile__title"]}>Меню</h1>
+        <div className={classes["mainMobile__info"]}>
+          <div className={classes["mainMobile__blocks"]}>
             <List
               elements={[
                 <MainMobileSelect
-                  title={'Общий поиск'}
+                  title={"Общий поиск"}
                   image={search}
                   develop={true}
-                  setOpenModal={() => console.log('в разработке')}
+                  setOpenModal={() => console.log("в разработке")}
                 />,
                 <MainMobileSelect
-                  title={'Сливы кр'}
+                  title={"Сливы кр"}
                   image={slivikr}
                   develop={false}
                   setOpenModal={() => {
-                    setOpenModal('tests');
+                    setOpenModal("tests");
                   }}
                 />,
                 <MainMobileSelect
-                  title={'Сливы экзаменов'}
+                  title={"Сливы экзаменов"}
                   image={sliviexams}
                   develop={false}
                   setOpenModal={() => {
-                    setOpenModal('exams');
+                    setOpenModal("exams");
                   }}
                 />,
                 <MainMobileSelect
-                  title={'Документы'}
+                  title={"Документы"}
                   image={documents}
                   develop={false}
                   setOpenModal={() => {
-                    setOpenModal('docs');
+                    setOpenModal("docs");
                   }}
                 />,
                 <MainMobileSelect
-                  title={'API'}
+                  title={"API"}
                   image={apipizza}
                   develop={false}
                   setOpenModal={() => {
-                    setOpenModal('api');
+                    setOpenModal("api");
                   }}
                 />,
                 <MainMobileSelect
-                  title={'Аккаунт'}
+                  title={"Аккаунт"}
                   image={smileAccount}
                   develop={true}
-                  setOpenModal={() => console.log('в разработке')}
+                  setOpenModal={() => console.log("в разработке")}
                 />,
                 <MainMobileSelect
-                  title={'Добавление'}
+                  title={"Добавление"}
                   image={addIcon}
                   develop={true}
-                  setOpenModal={() => console.log('в разработке')}
+                  setOpenModal={() => console.log("в разработке")}
                 />,
               ]}
             />
           </div>
         </div>
-        <img src={logo} alt="" className={classes['mainMobile__logo']} />
+        <img src={logo} alt="" className={classes["mainMobile__logo"]} />
       </div>
-      {openModal === 'tests' ? (
+      {openModal === "tests" ? (
         <Modal
-          element={<MainMobileItem buttonsKey="tests" />}
+          element={<MainMobileTasks buttonsKey="tests" />}
           title="Сливы кр"
           func={(c) => setOpenModal(c)}
         />
       ) : (
-        ''
+        ""
       )}
-      {openModal === 'exams' ? (
+      {openModal === "exams" ? (
         <Modal
-          element={<MainMobileItem buttonsKey="exams" />}
+          element={<MainMobileTasks buttonsKey="exams" />}
           title="Сливы экзаменов"
           func={(c) => setOpenModal(c)}
         />
       ) : (
-        ''
+        ""
       )}
-      {openModal === 'docs' ? (
-        <Modal element={<MainMobileDocs />} title="Документы" func={(c) => setOpenModal(c)} />
+      {openModal === "docs" ? (
+        <Modal
+          element={<MainMobileDocs />}
+          title="Документы"
+          func={(c) => setOpenModal(c)}
+        />
       ) : (
-        ''
+        ""
       )}
-      {openModal === 'api' ? (
-        <Modal element={<MobileAPI />} title="API" func={(c) => setOpenModal(c)} />
+      {openModal === "api" ? (
+        <Modal
+          element={<MobileAPI />}
+          title="API"
+          func={(c) => setOpenModal(c)}
+        />
       ) : (
-        ''
+        ""
       )}
     </>
   );
