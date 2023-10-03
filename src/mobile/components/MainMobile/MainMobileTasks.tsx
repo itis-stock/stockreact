@@ -1,18 +1,21 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { docsType, metaType, teachersType } from '../../../@types'
-import getSemestr from '../../../utils/getSemestr'
+
 import classes from '../../modules/MainMobile.module.scss'
 import arrowRight from '../../images/arrowright.svg'
-import checkingSpecial from '../../../utils/checkingSpecial'
-import Modal from '../Modal'
-import MainMobileDocsItem from './MainMobileDocsItem'
+import axios from 'axios'
+import { metaType, teachersType } from '../../../@types'
+import joinTeachers from '../../../utils/joinTeachers'
+import getSemestr from '../../../utils/getSemestr'
 import Skeleton from '../../../desktop/components/Skeleton'
-export default function MainMobileDocs() {
-  const [items, setItems] = useState<docsType[]>([])
+import Modal from '../Modal.tsx'
+import Post from '../Post.tsx'
+
+const MainMobileTasks = ({ buttonsKey }: { buttonsKey: 'exams' | 'tests' }) => {
+  const [items, setItems] = useState(null)
   const [teachers, setTeachers] = useState<teachersType | null>(null)
-  const [relevant, setRelevant] = useState<docsType[]>([])
-  const [openModal, setOpenModal] = useState<string | null>(null)
+  const [relevantKeys, setRelevantKeys] = useState<string[] | null>(null)
+  const [openModal, setOpenModal] = useState<string[] | null>(null)
+  const [element, setElement] = useState<string | null>(null)
   useEffect(() => {
     const getItems = async () => {
       const group = JSON.parse(String(localStorage.getItem('user'))).group
@@ -20,7 +23,9 @@ export default function MainMobileDocs() {
         'https://stockapi.netlify.app/api/meta.getActual'
       )
       const meta: metaType = response.data.response.data
-      setItems(meta['docs'])
+      if (buttonsKey) {
+        setItems(meta[buttonsKey])
+      }
       const teachersFirebase = meta.groups.find(
         (el) => el.group === group
       )?.teacher
@@ -37,26 +42,40 @@ export default function MainMobileDocs() {
   useEffect(() => {
     const currentCourse = teachers?.course
     const lecture = teachers?.lecture
-    const lectureName = lecture?.map((el) => el.name)
-    const lectureSubject = lecture?.map((el) => el.subject)
-    const relevantBuffer: docsType[] = []
-    items.forEach((el) => {
-      if (el.teacher !== null && el.subject !== null) {
-        if (
-          el.course === currentCourse &&
-          lectureName?.includes(el.teacher) &&
-          getSemestr() === el.semestr &&
-          lectureSubject?.includes(el.subject)
-        ) {
-          relevantBuffer.push(el)
-        }
+    const practice = teachers?.practice
+    const keys = items ? Object.keys(items) : []
+    const relevantKeysBuffer: string[] = []
+    for (let i = 0; i < keys.length; i++) {
+      if (buttonsKey === 'exams') {
+        lecture?.forEach((el) => {
+          const keyString = joinTeachers(
+            currentCourse || 0,
+            getSemestr(),
+            el.subject,
+            el.name
+          )
+          if (keyString === keys[i]) {
+            relevantKeysBuffer.push(keys[i])
+          }
+        })
+      } else if (buttonsKey === 'tests') {
+        practice?.forEach((el) => {
+          const keyString = joinTeachers(
+            currentCourse || 0,
+            getSemestr(),
+            el.subject,
+            el.name
+          )
+          if (keyString === keys[i]) {
+            relevantKeysBuffer.push(keys[i])
+          }
+        })
       }
-    })
-
-    setRelevant(relevantBuffer)
+    }
+    setRelevantKeys(relevantKeysBuffer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, teachers])
-
-  if (relevant?.length === 0) {
+  if (relevantKeys?.length === 0) {
     return (
       <>
         <Skeleton width={window.innerWidth - 20} height={60} radius={9} />
@@ -78,46 +97,31 @@ export default function MainMobileDocs() {
         </h2>
         <div className={classes['mainMobile__items-blocks']}>
           {items
-            ? items.map((el) => {
-                if (relevant?.includes(el)) {
+            ? Object.keys(items).map((el) => {
+                if (relevantKeys?.includes(el)) {
+                  const elemArray = el.split('-') //    <course>-<semestr>-<subject>-<teacher>
                   return (
                     <>
                       <div className={classes['mainMobile__separator']}></div>
                       <div
                         className={classes['mainMobile__items-block']}
-                        onClick={() => setOpenModal(el.fb_id)}>
+                        onClick={() => {
+                          setElement(el)
+                          setOpenModal(items[el])
+                        }}>
                         <div
                           className={
                             classes['mainMobile__items-blockInfoLeft']
                           }>
-                          {el.subject ? <div>{el.subject}</div> : ''}
-                          {el.teacher ? <div>{el.teacher}</div> : ''}
-                          {el.title ? (
-                            <div className={classes['mainMobile__item-title']}>
-                              {el.title}
-                            </div>
-                          ) : checkingSpecial(el.fb_id) ? (
-                            <div
-                              className={classes['mainMobile__item-special']}>
-                              by lldan
-                            </div>
-                          ) : (
-                            ''
-                          )}
+                          <div>{elemArray[2]}</div>
+                          <div>{elemArray[3]}</div>
                         </div>
                         <div
                           className={
                             classes['mainMobile__items-blockInfoRight']
                           }>
-                          {el.course ? <div>{el.course} курс</div> : ''}
-                          {el.semestr ? <div>{el.semestr} семестр</div> : ''}
-                          {el.year ? (
-                            <div className={classes['mainMobile__item-year']}>
-                              {el.year}
-                            </div>
-                          ) : (
-                            ''
-                          )}
+                          <div>{elemArray[0]} курс</div>
+                          <div>{elemArray[1]} семестр</div>
                         </div>
                         <img src={arrowRight} />
                       </div>
@@ -134,49 +138,34 @@ export default function MainMobileDocs() {
         </h2>
         <div className={classes['mainMobile__items-blocks']}>
           {items
-            ? items.map((el) => {
-                if (!relevant?.includes(el)) {
+            ? Object.keys(items).map((el) => {
+                if (!relevantKeys?.includes(el)) {
+                  const elemArray = el.split('-') //    <course>-<semestr>-<subject>-<teacher>
                   return (
                     <>
-                      <div className={classes['mainMobile__separator']}></div>
                       <div
                         className={classes['mainMobile__items-block']}
-                        onClick={() => setOpenModal(el.fb_id)}>
+                        onClick={() => {
+                          setElement(el)
+                          setOpenModal(items[el])
+                        }}>
                         <div
                           className={
                             classes['mainMobile__items-blockInfoLeft']
                           }>
-                          {el.subject ? <div>{el.subject}</div> : ''}
-                          {el.teacher ? <div>{el.teacher}</div> : ''}
-                          {el.title ? (
-                            <div className={classes['mainMobile__item-title']}>
-                              {el.title}
-                            </div>
-                          ) : checkingSpecial(el.fb_id) ? (
-                            <div
-                              className={classes['mainMobile__item-special']}>
-                              by lldan
-                            </div>
-                          ) : (
-                            ''
-                          )}
+                          <div>{elemArray[2]}</div>
+                          <div>{elemArray[3]}</div>
                         </div>
                         <div
                           className={
                             classes['mainMobile__items-blockInfoRight']
                           }>
-                          {el.course ? <div>{el.course} курс</div> : ''}
-                          {el.semestr ? <div>{el.semestr} семестр</div> : ''}
-                          {el.year ? (
-                            <div className={classes['mainMobile__item-year']}>
-                              {el.year}
-                            </div>
-                          ) : (
-                            ''
-                          )}
+                          <div>{elemArray[0]} курс</div>
+                          <div>{elemArray[1]} семестр</div>
                         </div>
                         <img src={arrowRight} />
                       </div>
+                      <div className={classes['mainMobile__separator']}></div>
                     </>
                   )
                 }
@@ -186,9 +175,11 @@ export default function MainMobileDocs() {
       </div>
       {openModal ? (
         <Modal
-          element={<MainMobileDocsItem fb_id={openModal} />}
+          element={
+            <Post posts={openModal} buttonsKey={buttonsKey} element={element} />
+          }
           func={(c) => setOpenModal(c)}
-          title={'Документ'}
+          title={buttonsKey === 'tests' ? 'Cлив кр' : 'Слив экзамена'}
         />
       ) : (
         ''
@@ -196,3 +187,5 @@ export default function MainMobileDocs() {
     </>
   )
 }
+
+export default MainMobileTasks
