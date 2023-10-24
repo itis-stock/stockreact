@@ -30,9 +30,9 @@
             .split("&")
             .map((el) => el.split("="));
           if (hash.length !== 3) {
-            window.location.href = window.location.origin + "/error";
+            window.location.replace(window.location.origin + "/error");
           } else if (user && hash[2][1] === JSON.parse(user)["id"]) {
-            window.location.href = window.location.origin + "/main";
+            window.location.replace(window.location.origin + "/main") ;
           } else {
             const script = document.createElement("SCRIPT");
             script.src =
@@ -45,7 +45,7 @@
             document.getElementsByTagName("head")[0].appendChild(script);
           }
         } else {
-          window.location.href = window.location.origin + "/error";
+          window.location.replace(window.location.origin + "/error");
         }
       }
       function callbackFunc(result) {
@@ -58,7 +58,7 @@
             }
           }
           if (!flag) {
-            window.location.href = window.location.origin + "/error";
+            window.location.replace(window.location.origin + "/error");
           }
         } else {
           const buffer = {
@@ -70,7 +70,7 @@
               result.response[0].last_name,
           };
           localStorage.setItem("buffer", JSON.stringify(buffer));
-          window.location.href = window.location.origin + "/redirect";
+          window.location.replace(window.location.origin + "/redirect");
         }
       }
       function createBuffer() {

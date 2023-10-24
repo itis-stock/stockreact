@@ -27,7 +27,7 @@ export default function NonFunctional({ err }: NonFunctionalPropsType) {
           </div>
         ) : (
           <div className="non-functional__light">
-            Попробуйте снова. Если ошибка не пропадет напишите разработчику
+            Попробуйте снова. Если ошибка не пропадет, напишите разработчику
           </div>
         )}
 
