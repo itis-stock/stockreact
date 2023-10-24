@@ -1,8 +1,8 @@
-@import 'reset';
-@import 'fonts';
+@import "reset";
 
 * {
-  font-family: 'SFProText', serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Ubuntu;
 }
 
 html,
@@ -13,7 +13,7 @@ body,
 
 body.mobile {
   background: #000000;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     width: 0;
     height: 0;
   }

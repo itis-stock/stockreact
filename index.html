@@ -1,40 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>сток</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script language="javascript">
-      if (window.location.pathname === '/check') {
-        const user = localStorage.getItem('user');
+      if (window.location.pathname === "/check") {
+        const user = localStorage.getItem("user");
         if (window.location.hash) {
           const hash = window.location.hash
-            .replace('#', '')
-            .split('&')
-            .map((el) => el.split('='));
+            .replace("#", "")
+            .split("&")
+            .map((el) => el.split("="));
           if (hash.length !== 3) {
-            window.location.href = window.location.origin + '/error';
-          } else if (user && hash[2][1] === JSON.parse(user)['id']) {
-            window.location.href = window.location.origin + '/main';
+            window.location.href = window.location.origin + "/error";
+          } else if (user && hash[2][1] === JSON.parse(user)["id"]) {
+            window.location.href = window.location.origin + "/main";
           } else {
-            const script = document.createElement('SCRIPT');
+            const script = document.createElement("SCRIPT");
             script.src =
-              'https://api.vk.com/method/groups.get?access_token=' +
+              "https://api.vk.com/method/groups.get?access_token=" +
               hash[0][1] +
-              '&user_id=' +
+              "&user_id=" +
               hash[2][1] +
-              '&v=5.131' +
-              '&callback=callbackFunc';
-            document.getElementsByTagName('head')[0].appendChild(script);
+              "&v=5.131" +
+              "&callback=callbackFunc";
+            document.getElementsByTagName("head")[0].appendChild(script);
           }
         } else {
-          window.location.href = window.location.origin + '/error';
+          window.location.href = window.location.origin + "/error";
         }
       }
       function callbackFunc(result) {
@@ -47,32 +58,35 @@
             }
           }
           if (!flag) {
-            window.location.href = window.location.origin + '/error';
+            window.location.href = window.location.origin + "/error";
           }
         } else {
           const buffer = {
             id: result.response[0].id,
             photo: result.response[0].photo_max_orig,
-            fullname: result.response[0].first_name + ' ' + result.response[0].last_name,
+            fullname:
+              result.response[0].first_name +
+              " " +
+              result.response[0].last_name,
           };
-          localStorage.setItem('buffer', JSON.stringify(buffer));
-          window.location.href = window.location.origin + '/redirect';
+          localStorage.setItem("buffer", JSON.stringify(buffer));
+          window.location.href = window.location.origin + "/redirect";
         }
       }
       function createBuffer() {
         const hash = window.location.hash
-          .replace('#', '')
-          .split('&')
-          .map((el) => el.split('='));
-        const script = document.createElement('SCRIPT');
+          .replace("#", "")
+          .split("&")
+          .map((el) => el.split("="));
+        const script = document.createElement("SCRIPT");
         script.src =
-          'https://api.vk.com/method/users.get?access_token=' +
+          "https://api.vk.com/method/users.get?access_token=" +
           hash[0][1] +
-          '&user_ids=' +
+          "&user_ids=" +
           hash[2][1] +
-          '&fields=photo_max_orig&v=5.131' +
-          '&callback=callbackFunc';
-        document.getElementsByTagName('head')[0].appendChild(script);
+          "&fields=photo_max_orig&v=5.131" +
+          "&callback=callbackFunc";
+        document.getElementsByTagName("head")[0].appendChild(script);
       }
     </script>
   </body>

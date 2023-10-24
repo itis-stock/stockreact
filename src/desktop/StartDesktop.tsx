@@ -1,25 +1,46 @@
-import './scss/StartDesktop.scss';
-import logo from './images/logo.png';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import "./scss/StartDesktop.scss";
+import logo from "./images/logo.png";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 export default function StartDesktop() {
   return (
     <div className="start">
       <div className="start__wrapper">
         <img src={logo} alt="logo" className="start__logo" />
         <div className="start__content">
-          <div className="start__content-item">Твердо и четко. Новый сток</div>
-          <div className="start__content-item">Просто потому что могу и мне похуй в принципе</div>
           <div className="start__content-item">
-            <span>Ты можешь разработать буквально все, что ты захочешь на основе моего API</span>
+            Что? Твердо и четко. Новый сток
+          </div>
+          <div className="start__content-item">
+            Зачем? Просто потому что могу и мне похуй в принципе
+          </div>
+          <div className="start__content-item">
+            <span>
+              Ты можешь разработать буквально все, что ты захочешь, на основе
+              нашего API
+            </span>
             <span>Хочешь разработать android или ios приложение - вперед</span>
-            <span>Хочешь попрактиковаться Java или C# - перепиши мое API на этих языках</span>
-            <span>Хочешь разработать сайт на любой технологии - вперед</span>
-            <span>Это чистый воды практика для любого</span>
+            <span>
+              Хочешь попрактиковаться на Java или C# - перепиши наше API на этих
+              языках
+            </span>
+            <span>
+              Хочешь разработать сайт используя любые технологии - делай
+            </span>
+            <span>
+              Не нравится текущий дизайн сайта - перерисуй, а мы сверстаем
+            </span>
+            <span>
+              Нашел баг или не согласен с тем, как мы что-то реализовали - пиши
+              нам, разберемся на ходу
+            </span>
           </div>
         </div>
         <div className="start__socials">
-          <a href="https://github.com/itis-stock" className="start__socials-item">
+          <a
+            href="https://github.com/itis-stock"
+            className="start__socials-item"
+          >
             Github
           </a>
           <a href="https://t.me/lld4n" className="start__socials-item">
@@ -28,18 +49,20 @@ export default function StartDesktop() {
         </div>
         <motion.a
           href={
-            'https://oauth.vk.com/authorize?client_id=' +
+            "https://oauth.vk.com/authorize?client_id=" +
             import.meta.env.VITE_GROUP_INDEX +
-            '&redirect_uri=' +
+            "&redirect_uri=" +
             window.location.origin +
-            '/check&display=page&scope=groups&response_type=token&v=5.131'
+            "/check&display=page&scope=groups&response_type=token&v=5.131"
           }
           className="start__vk"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
           <span className="start__white">Продолжить с VK</span>
-          <span className="start__light">Только для тех, кто состоит в оригинальном стоке</span>
+          <span className="start__light">
+            Только для тех, кто состоит в оригинальном стоке
+          </span>
         </motion.a>
       </div>
 
