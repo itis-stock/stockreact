@@ -1,18 +1,16 @@
-import React from 'react';
-import './scss/CreateUser.scss';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { setMeta } from '../redux/metaSlice';
-import Select from '../components/Select/Select';
-import qs from 'qs';
-import { bufferType, metaType } from '../@types';
-import Skeleton from './components/Skeleton';
+import React from "react";
+import "./scss/CreateUser.scss";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Select from "../components/Select/Select";
+import qs from "qs";
+import { bufferType, metaType } from "../@types";
+import Skeleton from "./components/Skeleton";
 export default function CreateUserDesktop() {
-  const [telegramValue, setTelegramValue] = React.useState('');
-  const [displayName, setDisplayName] = React.useState('');
-  const [description, setDescription] = React.useState('');
-  const [group, setGroup] = React.useState('');
+  const [telegramValue, setTelegramValue] = React.useState("");
+  const [displayName, setDisplayName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [group, setGroup] = React.useState("");
   const [buffer, setBuffer] = React.useState<bufferType | null>(null);
   async function postUser() {
     const dataPost = {
@@ -26,35 +24,35 @@ export default function CreateUserDesktop() {
       description: description,
     };
     const data = await axios.post(
-      'https://stockapi.netlify.app/api/users.post',
+      "https://stockapi.netlify.app/api/users.post",
       qs.stringify(dataPost),
       {
         headers: {
           master_key: import.meta.env.VITE_MASTER_KEY,
-          'content-type': 'application/x-www-form-urlencoded',
+          "content-type": "application/x-www-form-urlencoded",
         },
       },
     );
     console.log(data.data);
-    localStorage.removeItem('buffer');
-    localStorage.setItem('user', JSON.stringify(dataPost));
-    navigate('/main');
+    localStorage.removeItem("buffer");
+    localStorage.setItem("user", JSON.stringify(dataPost));
+    navigate("/main");
   }
-
-  const meta = useSelector((state: metaType) => state);
-  const dispatch = useDispatch();
+  const [meta, setMeta] = React.useState<metaType | null>(null);
   const navigate = useNavigate();
   async function gettingMeta() {
-    const data = (await axios.get('https://stockapi.netlify.app/api/meta.getActual')).data;
+    const data = (
+      await axios.get("https://stockapi.netlify.app/api/meta.getActual")
+    ).data;
     if (data.response.data) {
-      dispatch(setMeta(data.response.data));
+      setMeta(data.response.data);
     }
   }
   React.useEffect(() => {
-    if (localStorage.getItem('buffer')) {
-      setBuffer(JSON.parse(String(localStorage.getItem('buffer'))));
+    if (localStorage.getItem("buffer")) {
+      setBuffer(JSON.parse(String(localStorage.getItem("buffer"))));
     } else {
-      navigate('/error');
+      navigate("/error");
     }
     gettingMeta();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -95,7 +93,9 @@ export default function CreateUserDesktop() {
               <div className="create-user__left">Группа</div>
               {meta && meta.groups ? (
                 <Select
-                  list={meta?.groups.map((el: { group: string }) => el.group).sort()}
+                  list={meta?.groups
+                    .map((el: { group: string }) => el.group)
+                    .sort()}
                   func={(c) => setGroup(c)}
                 />
               ) : (
